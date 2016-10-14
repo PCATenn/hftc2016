@@ -1,2 +1,1 @@
-[{"availQty": 5, "location": "Nashville", "productName": "Car Seat", "productDesc": "Car seat for 20 pounds"},
- {"availQty": 5, "location": "Knoxville", "productName": "Car Seat", "productDesc": "Car seat for 20 pounds"}]
+[{"id":1,"productName":"Chair","productDesc":"Baby Chair","totalInventory":10,"reservedInventory":10,"familyInventory":null,"location":"Nashville"},{"id":2,"productName":"Car Seat ","productDesc":"Baby","totalInventory":5,"reservedInventory":2,"familyInventory":null,"location":"Knoxville"}]

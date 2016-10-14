@@ -53,7 +53,8 @@ h3 {
 h4 {
     font-weight: normal;
     font-size: 2rem;
-    color: #005dab;                 /* pcat dark blue */
+    /*color: #005dab;                 /!* pcat dark blue *!/*/
+    color: #5c707b;                 /* pcat dark gray */
     text-align: center;
     line-height: 2.5rem;
     padding: 0;
@@ -223,8 +224,15 @@ footer {
     /*margin: 3rem 0 0 0;*/
 /*}*/
 
+/*.inventory-table {*/
+    /*display: flex;*/
+    /*/!*flex: 1 1 auto;*!/*/
+    /*flex-direction: column;*/
+/*}*/
+
 .dummy-inventory {
     display: flex;
+    /*flex: 1 1 auto;*/
     flex-direction: column;
 }
 
@@ -302,5 +310,26 @@ footer {
     background-color: #f5f8fa;                    /* lighter than pcat light gray */
 /*border: 1px solid #cdd6dd;                            /!* pcat light gray *!/*/
     border-radius: .5rem;
+}
+
+.review-table-row {
+    display: flex;
+    align-items: center;
+}
+
+.review-table-row .button {
+    margin-right: 2rem;
+}
+
+.review-table-row-label {
+    font-size: 1.25rem;
+    color: #8595a2;                               /* pcat medium gray */
+    /*color: #cdd6dd;                                  /!* pcat light gray *!/*/
+    margin: 0 1rem;
+}
+
+.review-table-row-data {
+    font-size: 1.25rem;
+    margin-right: 4rem;
 }
 

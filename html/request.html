@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-    <script src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="vendor/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="vendor/datatables.min.css"/>
+ 
+    <script type="text/javascript" src="vendor/datatables.min.js"></script>
+
     <script src="request.js"></script>
     <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
     <title>PCAT inventory | Request items</title>
@@ -39,55 +41,22 @@
             <h1>
                 Request items from our inventory
             </h1>
-            <table id="dataTable" class="dummy-inventory">
-                   <thead>
-                        <tr>
-                            <th style="padding-left: 2.5rem;">Product Name</th>
-                            <th style="padding-left: 2.5rem;">Description</th>
-                            <th style="padding-left: 14rem;">Location</th>
-                            <th style="padding-left: 8rem;">Avail Qty</th>
-                      </tr>
-                   </thead>
-                </table>
-                </div>
 
-                <div class="dummy-inventory-row">
-                    <label><input type="checkbox" class="medium-checkbox" value="first_checkbox"></label>
-                    <div class="dummy-prod dummy-table-row"></div>
-                    <div class="dummy-desc dummy-table-row"></div>
-                    <div class="dummy-loc dummy-table-row"></div>
-                    <div class="dummy-avail dummy-table-row"></div>
-                    <button name="request-item" class="button inline-button affirmative">
-                        Request
-                    </button>
-                </div>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        <th>Avail Qty</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
 
-                <div class="dummy-inventory-row">
-                    <label><input type="checkbox" class="medium-checkbox" value="first_checkbox"></label>
-                    <div class="dummy-prod dummy-table-row"></div>
-                    <div class="dummy-desc dummy-table-row"></div>
-                    <div class="dummy-loc dummy-table-row"></div>
-                    <div class="dummy-avail dummy-table-row"></div>
-                    <button name="request-item" class="button inline-button affirmative">
-                        Request
-                    </button>
-                </div>
-
-                <div class="dummy-inventory-row">
-                    <label><input type="checkbox" class="medium-checkbox" value="first_checkbox"></label>
-                    <div class="dummy-prod dummy-table-row"></div>
-                    <div class="dummy-desc dummy-table-row"></div>
-                    <div class="dummy-loc dummy-table-row"></div>
-                    <div class="dummy-avail dummy-table-row"></div>
-                    <button name="request-item" class="button inline-button affirmative">
-                        Request
-                    </button>
-                </div>
-
-                <h3 style="margin: 4rem 1rem 2rem 1rem;">
-                    The next page will allow you to enter the family number,<br>change quantities, and review your request.
-                </h3>
-            </div>
+            <h3 style="margin: 4rem 1rem 2rem 1rem;">
+                The next page will allow you to enter the family number,<br>change quantities, and review your request.
+            </h3>
 
             <button name="continue-request" class="button medium-button affirmative">
                 Continue on next page
