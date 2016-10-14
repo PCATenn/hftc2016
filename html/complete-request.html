@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
+    <title>PCAT inventory | Complete request</title>
+</head>
+<body>
+
+    <nav>
+        <a href="http://www.pcat.org/">
+            <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
+        </a>
+
+        <ul class="nav-list">
+            <li><a href="index.html" style="color: rgba(1,1,1,0.2)">A1</a></li>
+            <li><a href="request.html">B1</a></li>
+            <li><a href="complete-request.html" style="color: rgba(1,1,1,0.2)">B2</a></li>
+            <li><a href="confirm-request.html" style="color: rgba(1,1,1,0.2)">B3</a></li>
+            <li><a href="review-approvals.html">C1</a></li>
+            <li><a href="confirm-approvals.html" style="color: rgba(1,1,1,0.2)">C2</a></li>
+            <li><a href="manage-items.html">D1</a></li>
+            <li><a href="update-items.html">D2</a></li>
+            <li><a href="manage-users.html">D3</a></li>
+            <li><a href="update-users.html">D4</a></li>
+        </ul>
+
+        <button name="logout" class="button logout-button neutral">
+            Log out
+        </button>
+    </nav>
+
+    <section>
+        <div class="section-body">
+            <h1>
+                Complete your request
+            </h1>
+
+            <div class="inline-directive">
+                <h2>
+                    Enter the family number:
+                </h2>
+
+                <label><input type="text" class="family-number-input"></label>
+            </div>
+
+            <div class="item-box">
+                <h4>
+                    Items you’re requesting:
+                </h4>
+
+                <div class="dummy-inventory">
+                    <div class="dummy-inventory-label-row">
+                        <p style="padding-left: 0;">Qty</p>
+                        <p style="padding-left: 1.75rem;">Product #</p>
+                        <p style="padding-left: 2.75rem;">Description</p>
+                        <p style="padding-left: 14.25rem;">Location</p>
+                    </div>
+
+                    <div class="dummy-inventory-row">
+                        <div class="dummy-qty dummy-table-row confirm"></div>
+                        <div class="dummy-prod dummy-table-row"></div>
+                        <div class="dummy-desc dummy-table-row"></div>
+                        <div class="dummy-loc dummy-table-row"></div>
+                    </div>
+
+                    <div class="dummy-inventory-row">
+                        <div class="dummy-qty dummy-table-row confirm"></div>
+                        <div class="dummy-prod dummy-table-row"></div>
+                        <div class="dummy-desc dummy-table-row"></div>
+                        <div class="dummy-loc dummy-table-row"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 4rem 8rem 2rem 8rem;">
+                To remove an item from the list, set quantity to 0 (zero) before submitting.
+            </h3>
+
+            <div>
+                <button name="cancel-request" class="button medium-button neutral">
+                    Start over
+                </button>
+                <button name="submit-request" class="button medium-button affirmative">
+                    Submit for approval
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        Prevent Child Abuse Tennessee
+    </footer>
+
+</body>
+</html>
