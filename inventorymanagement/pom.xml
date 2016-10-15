@@ -64,6 +64,7 @@
 			<version>2.7.5</version>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<finalName>inventorymanagement</finalName>
 	</build>

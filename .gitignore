@@ -1,5 +1,5 @@
 .settings/
-
+target/
 # Generic ignore stuff
 .vagrant/*
 *.komodoproject
@@ -14,3 +14,4 @@ logs/
 /.idea/
 buildtmp
 vendor/
+.classpath
