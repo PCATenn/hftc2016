@@ -11,6 +11,7 @@ public class User implements java.io.Serializable {
 	private Integer id;
 	private String firstname;
 	private String supervisor;
+	private String supervisoremail;
 	private String email;
 	private String role;
 	private String lastname;
@@ -88,6 +89,21 @@ public class User implements java.io.Serializable {
 
 	public void setIsactive(String isactive) {
 		this.isactive = isactive;
+	}
+
+	/**
+	 * @return the supervisoremail
+	 */
+	public String getSupervisoremail() {
+		return supervisoremail;
+	}
+
+	/**
+	 * @param supervisoremail
+	 *            the supervisoremail to set
+	 */
+	public void setSupervisoremail(String supervisoremail) {
+		this.supervisoremail = supervisoremail;
 	}
 
 }

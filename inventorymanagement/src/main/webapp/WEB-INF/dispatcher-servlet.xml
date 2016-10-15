@@ -10,12 +10,12 @@
 
 	<mvc:annotation-driven />
 
-	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/**" location="/" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/" />
-		<property name="suffix" value=".jsp" />
+		<property name="prefix" value="/" />
+		<property name="suffix" value="" />
 	</bean>
 
 	<context:component-scan base-package="org.pcat.inventory" />
@@ -38,5 +38,26 @@
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- SET default mail properties -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="pcatinventory@gmail.com" />
+		<property name="password" value="nonprofit123" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.host">smtp.gmail.com</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.debug">true</prop>
+				<prop key="mail.smtp.port">587</prop>
+				<prop key="mail.smtp.socketFactory.port">587</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
 	</bean>
 </beans>

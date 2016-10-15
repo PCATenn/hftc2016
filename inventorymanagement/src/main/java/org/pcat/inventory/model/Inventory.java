@@ -9,38 +9,12 @@ public class Inventory implements java.io.Serializable {
 	// Fields
 
 	private Integer id;
-	private Location location;
-	private ProductType productType;
+	private String productName;
+	private String productDesc;
 	private Integer totalInventory;
 	private Integer reservedInventory;
-	private FamilyInventory familyInventory;
-	private PendingRequest pendingRequest;
-
-	// Constructors
-
-	/** default constructor */
-	public Inventory() {
-	}
-
-	/** minimal constructor */
-	public Inventory(ProductType productType, Integer totalInventory, Integer reservedInventory) {
-		this.productType = productType;
-		this.totalInventory = totalInventory;
-		this.reservedInventory = reservedInventory;
-	}
-
-	/** full constructor */
-	public Inventory(Location location, ProductType productType, Integer totalInventory, Integer reservedInventory,
-			FamilyInventory familyInventory, PendingRequest pendingRequest) {
-		this.location = location;
-		this.productType = productType;
-		this.totalInventory = totalInventory;
-		this.reservedInventory = reservedInventory;
-		this.familyInventory = familyInventory;
-		this.pendingRequest = pendingRequest;
-	}
-
-	// Property accessors
+	// private FamilyInventory familyInventory;
+	private String location;
 
 	public Integer getId() {
 		return this.id;
@@ -48,22 +22,6 @@ public class Inventory implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Location getLocation() {
-		return this.location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
-	public ProductType getProductType() {
-		return this.productType;
-	}
-
-	public void setProductType(ProductType productType) {
-		this.productType = productType;
 	}
 
 	public Integer getTotalInventory() {
@@ -82,20 +40,58 @@ public class Inventory implements java.io.Serializable {
 		this.reservedInventory = reservedInventory;
 	}
 
-	public FamilyInventory getFamilyInventory() {
-		return this.familyInventory;
+
+//	public FamilyInventory getFamilyInventory() {
+//		return this.familyInventory;
+//	}
+//
+//	public void setFamilyInventory(FamilyInventory familyInventory) {
+//		this.familyInventory = familyInventory;
+//	}
+
+	/**
+	 * @return the productName
+	 */
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setFamilyInventory(FamilyInventory familyInventory) {
-		this.familyInventory = familyInventory;
+	/**
+	 * @param productName
+	 *            the productName to set
+	 */
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public PendingRequest getPendingRequest() {
-		return this.pendingRequest;
+	/**
+	 * @return the productDesc
+	 */
+	public String getProductDesc() {
+		return productDesc;
 	}
 
-	public void setPendingRequest(PendingRequest pendingRequest) {
-		this.pendingRequest = pendingRequest;
+	/**
+	 * @param productDesc
+	 *            the productDesc to set
+	 */
+	public void setProductDesc(String productDesc) {
+		this.productDesc = productDesc;
+	}
+
+	/**
+	 * @return the location
+	 */
+	public String getLocation() {
+		return location;
+	}
+
+	/**
+	 * @param location
+	 *            the location to set
+	 */
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 }

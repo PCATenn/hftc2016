@@ -8,13 +8,16 @@
     <class name="org.pcat.inventory.model.User" table="user" catalog="pcat">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="increment" />
         </id>
         <property name="firstname" type="java.lang.String">
             <column name="firstname" />
         </property>
         <property name="supervisor" type="java.lang.String">
             <column name="supervisor" />
+        </property>
+         <property name="supervisoremail" type="java.lang.String">
+            <column name="supervisor_email" />
         </property>
         <property name="email" type="java.lang.String">
             <column name="email" />
