@@ -61,7 +61,12 @@ public class RequestApprovalController {
 		int userId = Integer.valueOf(request.getParameter("userId"));
 		String familyId = request.getParameter("familyId");
 		int inventoryId = Integer.valueOf(request.getParameter("inventoryId"));
-		int quantity = Integer.valueOf(request.getParameter("quantity"));
+		int quantity = 1;
+		String requestQty = request.getParameter("quantity");
+		
+		if(requestQty != null && !requestQty.trim().isEmpty()) {
+			quantity = Integer.valueOf(request.getParameter("quantity"));
+		}
 		requestApprovalService.submitRequests(userId, familyId, inventoryId, quantity);
 		return new ModelAndView("confirm-request.jsp");
 	}
