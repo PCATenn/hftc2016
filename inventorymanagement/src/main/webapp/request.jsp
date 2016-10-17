@@ -5,6 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <script src="vendor/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="vendor/additional-methods.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="vendor/datatables.min.css"/>
  
     <script type="text/javascript" src="vendor/datatables.min.js"></script>
@@ -40,7 +43,7 @@
                         Enter the family number:
                     </h2>
 
-                    <label><input type="text" class="family-number-input"></label>
+                    <label><input type="text" name="familyNumber" class="family-number-input" ></label>
                 </div>
 
                 <h2 style="margin: -2rem 5rem 3rem 5rem">
@@ -48,7 +51,7 @@
                 </h2>
 
                 <div style="padding: 0 5rem;">
-                    <table id="dataTable">
+                    <table id="dataTable" name="dataTable">
                         <thead>
                         <tr>
                             <th>Product Name</th>

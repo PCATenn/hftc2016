@@ -267,3 +267,6 @@ th {
 form h2 {
     font-size: 2rem;
 }
+form .error {
+  color: #ff0000;
+}

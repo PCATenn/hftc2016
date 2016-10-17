@@ -1,5 +1,35 @@
 var url = "listAllInventories"
 $(document).ready(function(){
+	var request_items_form = $("#request-items");
+	jQuery.validator.setDefaults({
+		  debug: true,
+		  success: "valid"
+		});
+	/*
+	jQuery.validator.addMethod("familyNumber", function (value, element){
+			var familyNumber = $("#familyNumber").val();
+			var regex = /^\w{4}.*\d+/;
+			return regex.test(familyNumber);
+	});
+	*/
+	$("#request-items").validate({
+		rules: {
+			"familyNumber": {
+				required: true,
+				minlength: 5,
+				pattern: /^\w{4}.*\d+/
+			},
+			"quantity": {
+				required: true,
+				min: 1
+			}
+		},
+		messages: {
+			"familyNumber": "Please enter a 4 character county followed by at least one number",
+			"quantity": "Quantity must be entered"
+		}
+		
+	});
     $('#dataTable').DataTable( {
         "ajax": {
             "url": url,
@@ -18,19 +48,24 @@ $(document).ready(function(){
             { "targets": 4, "render":
               function(data, type, row, meta) {
                   
-                  return '<input type="text" name="quantity" id="qty'+row.id+'" />';
+                  return '<input  type="text" value="1" name="quantity" id="qty'+row.id+'" />';
               }
             },
             { "targets": 5, "render":
               function(data, type, row, meta) {
-                  return '<a onclick="submitRequest('+row.id+');">Request</a>';
+                  return '<a class="requestApproval" onclick="submitRequest('+row.id+');">Request</a>';
               }
             }
         ]
     } );
+
 });
 
 function submitRequest(id)  {
+	if(!$("#request-items").valid()){
+		alert("Family Number or Quantity is invalid");
+		return;
+	}
     var qty = $('#qty'+id).val();
     var familyId = $('#request-items .family-number-input').val();
     userId = $('#request-items input[name=userId]').val();
@@ -46,3 +81,4 @@ function submitRequest(id)  {
     }
     $form.submit();
 }
+
