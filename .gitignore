@@ -13,5 +13,4 @@ target/
 logs/
 /.idea/
 buildtmp
-vendor/
 .classpath
