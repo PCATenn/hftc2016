@@ -1,6 +1,7 @@
 import mysql.connector
 # cnx = mysql.connector.connect(user='jabadehut', password='hftc2016', host='13.92.32.92', database='pcat')
-cnx = mysql.connector.connect(host='localhost', database='pcat')
+cnx = mysql.connector.connect(user='root', password='root', host='localhost', database='pcat')
+# cnx = mysql.connector.connect(host='localhost', database='pcat')
 
 cursor = cnx.cursor()
 cnx.autocommit = True
