@@ -63,7 +63,7 @@ $(document).ready(function(){
 
 function submitRequest(id)  {
 	if(!$("#request-items").valid()){
-		alert("Family Number or Quantity is invalid");
+		alert("Please check the family number and the quantity");
 		return;
 	}
     var qty = $('#qty'+id).val();
