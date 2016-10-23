@@ -20,34 +20,19 @@ public class Inventory implements java.io.Serializable {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	/**
+	 * @return the location
+	 */
+	public String getLocation() {
+		return location;
 	}
 
-	public Integer getTotalInventory() {
-		return this.totalInventory;
+	/**
+	 * @return the productDesc
+	 */
+	public String getProductDesc() {
+		return productDesc;
 	}
-
-	public void setTotalInventory(Integer totalInventory) {
-		this.totalInventory = totalInventory;
-	}
-
-	public Integer getReservedInventory() {
-		return this.reservedInventory;
-	}
-
-	public void setReservedInventory(Integer reservedInventory) {
-		this.reservedInventory = reservedInventory;
-	}
-
-
-//	public FamilyInventory getFamilyInventory() {
-//		return this.familyInventory;
-//	}
-//
-//	public void setFamilyInventory(FamilyInventory familyInventory) {
-//		this.familyInventory = familyInventory;
-//	}
 
 	/**
 	 * @return the productName
@@ -56,19 +41,32 @@ public class Inventory implements java.io.Serializable {
 		return productName;
 	}
 
-	/**
-	 * @param productName
-	 *            the productName to set
-	 */
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public Integer getReservedInventory() {
+		return this.reservedInventory;
+	}
+
+	public Integer getTotalInventory() {
+		return this.totalInventory;
+	}
+
+	// public FamilyInventory getFamilyInventory() {
+	// return this.familyInventory;
+	// }
+	//
+	// public void setFamilyInventory(FamilyInventory familyInventory) {
+	// this.familyInventory = familyInventory;
+	// }
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	/**
-	 * @return the productDesc
+	 * @param location
+	 *            the location to set
 	 */
-	public String getProductDesc() {
-		return productDesc;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	/**
@@ -80,18 +78,19 @@ public class Inventory implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the location
+	 * @param productName
+	 *            the productName to set
 	 */
-	public String getLocation() {
-		return location;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	/**
-	 * @param location
-	 *            the location to set
-	 */
-	public void setLocation(String location) {
-		this.location = location;
+	public void setReservedInventory(Integer reservedInventory) {
+		this.reservedInventory = reservedInventory;
+	}
+
+	public void setTotalInventory(Integer totalInventory) {
+		this.totalInventory = totalInventory;
 	}
 
 }

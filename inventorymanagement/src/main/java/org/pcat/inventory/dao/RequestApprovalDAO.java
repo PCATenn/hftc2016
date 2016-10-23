@@ -103,12 +103,8 @@ public class RequestApprovalDAO {
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.add(Restrictions.eq("id", userId));
 			User user = (User) criteria.list().get(0);
+			
 			String email = user.getEmail();
-			SimpleMailMessage mailMessage = new SimpleMailMessage();
-			mailMessage.setFrom("admin@pcat.org");
-			mailMessage.setTo(email);
-			mailMessage.setSubject("User Request Approved");
-			mailSender.send(mailMessage);
 			completedApproval = true;
 			tx.commit();
 		} catch (Exception e) {
