@@ -8,6 +8,7 @@ public class Inventory implements java.io.Serializable {
 
 	// Fields
 
+	private static final long serialVersionUID = 2789161531642080248L;
 	private Integer id;
 	private String productName;
 	private String productDesc;
@@ -15,6 +16,21 @@ public class Inventory implements java.io.Serializable {
 	private Integer reservedInventory;
 	// private FamilyInventory familyInventory;
 	private String location;
+
+	public Inventory(int id, int quantity) {
+		this(id, "", "", null, null, null);
+	}
+
+	public Inventory(Integer id, String productName, String productDesc, Integer totalInventory,
+			Integer reservedInventory, String location) {
+		super();
+		this.id = id;
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.totalInventory = totalInventory;
+		this.reservedInventory = reservedInventory;
+		this.location = location;
+	}
 
 	public Integer getId() {
 		return this.id;

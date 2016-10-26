@@ -1,19 +1,19 @@
 package org.pcat.inventory.service;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.pcat.inventory.model.HomeVisitor;
 import org.pcat.inventory.model.RequestItem;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-public class InventoryUtilityTest {
+public class InventoryBusinessObjectTest {
+
+	private InventoryBusinessObject inventoryBusinessObject = new InventoryBusinessObject();
+	
+	
 
 	@Test
 	public void itemDescriptionsTest() {
@@ -24,5 +24,7 @@ public class InventoryUtilityTest {
 		items.add(new RequestItem(4, 1));
 		items.add(new RequestItem(5, 1));
 		items.add(new RequestItem(6, 1));
+
+		assertThat(inventoryBusinessObject.getItemDescriptions(items), equalTo(new ArrayList<String>()));
 	}
 }

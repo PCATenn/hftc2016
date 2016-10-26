@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.pcat.inventory.model.HomeVisitor;
+import org.pcat.inventory.model.Inventory;
 import org.pcat.inventory.model.RequestItem;
 import org.pcat.inventory.model.RequestState;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,11 @@ public class RequestFamilyItemsService {
 	@Autowired
 	private HomeVisitorEmailRequestUtility requestUtility;
 	@Autowired
-	private InventoryUtility inventoryUtility;
+	private InventoryBusinessObject inventoryBusinessObject;
 
-	public RequestState requestItems(String familyNumber, ArrayList<RequestItem> requestItems,
+	public RequestState requestItems(String familyNumber, List<RequestItem> requestItems,
 			HomeVisitor homeVisitor) {
-		List<String> itemDescriptions = inventoryUtility.getItemDescriptions(requestItems);
+		List<String> itemDescriptions = inventoryBusinessObject.getItemDescriptions(requestItems);
 		mailService.sendMail(homeVisitor.getEmail(), homeVisitor.getSupervisorEmail(),
 				String.format(HomeVisitorEmailRequestUtility.HOME_VISITOR_SUBJECT, familyNumber),
 				requestUtility.getMessageBody(homeVisitor.getFirstname(), homeVisitor.getLastname(), itemDescriptions));
