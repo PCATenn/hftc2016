@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  *
  */
 @Repository
-public class InventoryManagementDAO implements BaseDao {
+public class InventoryDao implements BaseDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -57,12 +57,16 @@ public class InventoryManagementDAO implements BaseDao {
 		return isDeleted;
 	}
 
-	public Object find(Class<?> clazz, Long id) {
-		return baseDao.find(clazz, id);
+	public <Inventory extends Object> Inventory getById(Long id) {
+		return (Inventory) baseDao.getById(id);
 	}
 
 	public List<?> findAll(Class<?> clazz) {
 		return baseDao.findAll(clazz);
+	}
+
+	public BaseDao getBaseDao() {
+		return baseDao;
 	}
 
 	public Inventory getById(long id) {
@@ -175,6 +179,10 @@ public class InventoryManagementDAO implements BaseDao {
 
 	public void saveOrUpdate(Object obj) {
 		baseDao.saveOrUpdate(obj);
+	}
+
+	public void setBaseDao(BaseDao baseDao) {
+		this.baseDao = baseDao;
 	}
 
 	/**

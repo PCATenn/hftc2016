@@ -1,10 +1,8 @@
 package org.pcat.inventory.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.pcat.inventory.model.HomeVisitor;
-import org.pcat.inventory.model.Inventory;
 import org.pcat.inventory.model.RequestItem;
 import org.pcat.inventory.model.RequestState;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +27,16 @@ public class RequestFamilyItemsService {
 		return RequestState.PENDING;
 	}
 
+	public void setInventoryBusinessObject(InventoryBusinessObject inventoryBusinessObject) {
+		this.inventoryBusinessObject = inventoryBusinessObject;
+	}
+
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
+	}
+
+	public void setRequestUtility(HomeVisitorEmailRequestUtility requestUtility) {
+		this.requestUtility = requestUtility;
 	}
 
 }

@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 public interface BaseDao {
 	public void delete(Object obj);
 
-	public Object find(Class<?> clazz, Long id);
+	public <T extends Object> T getById(Long id);
 
 	public List<?> findAll(Class<?> clazz);
 

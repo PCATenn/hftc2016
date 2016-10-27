@@ -12,7 +12,7 @@ import org.pcat.inventory.model.HomeVisitor;
 import org.pcat.inventory.model.RequestItem;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 // @ContextConfiguration(locations = { "classpath:test-serviceContext.xml" })
 public class RequestFamilyItemsServiceTest {
 
@@ -23,6 +23,8 @@ public class RequestFamilyItemsServiceTest {
 		final String familyNumber = "TEST-0001";
 		final MailService ms = mock(MailService.class);
 		requestFamilyItemsService.setMailService(ms);
+		final InventoryBusinessObject invBizObj = mock(InventoryBusinessObject.class);
+		requestFamilyItemsService.setInventoryBusinessObject(invBizObj);
 
 		ArrayList<RequestItem> requestItems = new ArrayList<RequestItem>();
 		requestItems.add(new RequestItem(1, 1));

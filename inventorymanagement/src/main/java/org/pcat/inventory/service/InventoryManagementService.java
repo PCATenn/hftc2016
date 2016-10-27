@@ -2,7 +2,7 @@ package org.pcat.inventory.service;
 
 import java.util.List;
 
-import org.pcat.inventory.dao.InventoryManagementDAO;
+import org.pcat.inventory.dao.InventoryDao;
 import org.pcat.inventory.model.FamilyInventory;
 import org.pcat.inventory.model.Inventory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,21 +12,21 @@ import org.springframework.stereotype.Service;
 public class InventoryManagementService {
 
 	@Autowired
-	private InventoryManagementDAO inventoryManagementDAO;
+	private InventoryDao inventoryDao;
 
 	/**
 	 * @return the inventoryManagementDAO
 	 */
-	public InventoryManagementDAO getInventoryManagementDAO() {
-		return inventoryManagementDAO;
+	public InventoryDao getInventoryManagementDAO() {
+		return inventoryDao;
 	}
 
 	/**
-	 * @param inventoryManagementDAO
+	 * @param inventoryDao
 	 *            the inventoryManagementDAO to set
 	 */
-	public void setInventoryManagementDAO(InventoryManagementDAO inventoryManagementDAO) {
-		this.inventoryManagementDAO = inventoryManagementDAO;
+	public void setInventoryManagementDAO(InventoryDao inventoryDao) {
+		this.inventoryDao = inventoryDao;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class InventoryManagementService {
 	 * @return
 	 */
 	public boolean SaveInventory(Inventory inventory) {
-		return inventoryManagementDAO.saveInventory(inventory);
+		return inventoryDao.saveInventory(inventory);
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class InventoryManagementService {
 	 * @return
 	 */
 	public boolean updateInventory(Inventory inventory) {
-		return inventoryManagementDAO.updateInventory(inventory);
+		return inventoryDao.updateInventory(inventory);
 	}
 
 	/**
@@ -56,16 +56,16 @@ public class InventoryManagementService {
 	 * @return
 	 */
 	public boolean deleteInventory(Inventory inventory) {
-		return inventoryManagementDAO.deleteInventory(inventory);
+		return inventoryDao.deleteInventory(inventory);
 	}
 	
 	public List<Inventory> listAllInventory(){
-		return inventoryManagementDAO.listAllInventory();
+		return inventoryDao.listAllInventory();
 		
 	}
 	
 	public List<FamilyInventory> listAllFamilyInventory(){
-		return inventoryManagementDAO.listAllFamilyInventory();
+		return inventoryDao.listAllFamilyInventory();
 		
 	}
 }

@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class BaseDaoImpl implements BaseDao {
+public abstract class BaseDaoImpl implements BaseDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -18,7 +18,7 @@ public class BaseDaoImpl implements BaseDao {
 	}
 
 	@Override
-	public Object find(Class<?> clazz, Long id) {
+	public <Object> Object getById(Long id) {
 		Session session = null;
 		Transaction tx = null;
 		Object result = null;

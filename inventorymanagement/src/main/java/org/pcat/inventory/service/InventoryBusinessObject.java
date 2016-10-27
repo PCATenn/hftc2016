@@ -3,7 +3,7 @@ package org.pcat.inventory.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.pcat.inventory.dao.InventoryManagementDAO;
+import org.pcat.inventory.dao.InventoryDao;
 import org.pcat.inventory.model.Inventory;
 import org.pcat.inventory.model.RequestItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class InventoryBusinessObject {
 
 	@Autowired
-	private InventoryManagementDAO inventoryDAO;
+	private InventoryDao inventoryDAO;
 
 	public InventoryBusinessObject() {
 		super();
@@ -24,6 +24,11 @@ public class InventoryBusinessObject {
 			  inventories.add(inventory.getProductName());
 			});
 		return inventories;
+	}
+
+	public void setInventoryDao(InventoryDao dao) {
+		this.inventoryDAO = dao;
+		
 	}
 
 }
