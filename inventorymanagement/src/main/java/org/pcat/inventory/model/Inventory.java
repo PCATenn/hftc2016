@@ -14,9 +14,7 @@ public class Inventory implements java.io.Serializable {
 	private String productDesc;
 	private Integer totalInventory;
 	private Integer reservedInventory;
-	// private FamilyInventory familyInventory;
 	private String location;
-
 
 	public Inventory(Integer id, String productName, String productDesc, Integer totalInventory,
 			Integer reservedInventory, String location) {
@@ -66,14 +64,6 @@ public class Inventory implements java.io.Serializable {
 		return this.totalInventory;
 	}
 
-	// public FamilyInventory getFamilyInventory() {
-	// return this.familyInventory;
-	// }
-	//
-	// public void setFamilyInventory(FamilyInventory familyInventory) {
-	// this.familyInventory = familyInventory;
-	// }
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -108,6 +98,13 @@ public class Inventory implements java.io.Serializable {
 
 	public void setTotalInventory(Integer totalInventory) {
 		this.totalInventory = totalInventory;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Id is: %d, Product Name: %s, Product Description: %s, Total Inventory: %d, Reserved Inventory: %d Location is: %s",
+				id, productName, productDesc, totalInventory, reservedInventory, location);
 	}
 
 }

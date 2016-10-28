@@ -2,78 +2,82 @@ package org.pcat.inventory.service;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.pcat.inventory.TestHelper;
 import org.pcat.inventory.model.HomeVisitor;
 import org.pcat.inventory.model.RequestItem;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Level;
 
 //@RunWith(SpringRunner.class)
 // @ContextConfiguration(locations = { "classpath:test-serviceContext.xml" })
 public class RequestFamilyItemsServiceTest {
+
+	private static final Logger logger = LoggerFactory.getLogger(RequestFamilyItemsServiceTest.class);
+	private static TestHelper helper = new TestHelper();
+
+	@BeforeClass
+	public static void setup() {
+		helper.saveCurrentRootLogging();
+		helper.setRootTestLoggerLevel(Level.DEBUG);
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		helper.resetSaveRootLoggerLevel();
+	}
 
 	private RequestFamilyItemsService requestFamilyItemsService = new RequestFamilyItemsService();
 
 	@Test
 	public void didMailRequestHappen() {
 		final String familyNumber = "TEST-0001";
+		
 		final MailService ms = mock(MailService.class);
 		requestFamilyItemsService.setMailService(ms);
-		final InventoryBusinessObject invBizObj = mock(InventoryBusinessObject.class);
+		
+		final InventoryBO invBizObj = mock(InventoryBO.class);
 		requestFamilyItemsService.setInventoryBusinessObject(invBizObj);
+		
+		final HomeVisitorEmailRequestBO emailUtility = mock(HomeVisitorEmailRequestBO.class);
+		requestFamilyItemsService.setRequestUtility(emailUtility);
 
 		ArrayList<RequestItem> requestItems = new ArrayList<RequestItem>();
-		requestItems.add(new RequestItem(1, 1));
-		requestItems.add(new RequestItem(2, 1));
-		requestItems.add(new RequestItem(3, 1));
-		requestItems.add(new RequestItem(4, 1));
-		requestItems.add(new RequestItem(5, 1));
-		requestItems.add(new RequestItem(6, 1));
+		for (int x = 1; x < 7; x++) {
+			requestItems.add(new RequestItem(x, 1));
+		}
 
 		List<String> items = new ArrayList<String>();
-		items.add("Item 1");
-		items.add("Item 2");
-		items.add("Item 3");
-		items.add("Item 4");
-		items.add("Item 5");
-		items.add("Item 6");
+		for (int x = 1; x < 7; x++) {
+			items.add(String.format("Item %d", x));
+		}
+		when(invBizObj.getItemDescriptions(requestItems)).thenReturn(items);
 
-		final HomeVisitor homeVisitor = new HomeVisitor("firstName", "lastName", "email", "supervisorEmail");
-		final String subject = String.format(HomeVisitorEmailRequestUtility.HOME_VISITOR_SUBJECT, familyNumber);
-		final String message = new HomeVisitorEmailRequestUtility().getMessageBody(homeVisitor.getFirstname(),
-				homeVisitor.getLastname(), items);
+		final HomeVisitor homeVisitor = new HomeVisitor("testFirstName", "testLastName", "testEmail",
+				"testSupervisorEmail");
+
+		final String testSubject = "Requesting supplies for family TEST-0001";
+		logger.debug(String.format("subject: %s", testSubject));
+
+		final String newline = System.getProperty("line.separator");
+		StringBuffer testMessage = new StringBuffer("These items have been requested by testFirstName testLastName: ");
+		for (int x = 1; x < 7; x++) {
+			testMessage.append(String.format("%sItem %d", newline, x));
+		}
+		when(emailUtility.getMessageBody("testFirstName", "testLastName", items)).thenReturn(testMessage.toString());
+		logger.debug(String.format("body:  %s", testMessage));
 
 		requestFamilyItemsService.requestItems(familyNumber, requestItems, homeVisitor);
-		verify(ms).sendMail(homeVisitor.getFirstname(), homeVisitor.getLastname(), subject, message);
+		verify(ms).sendMail(homeVisitor.getEmail(), homeVisitor.getSupervisorEmail(), testSubject, testMessage.toString());
 	}
 
 }
-/*
- * package org.pcat.inventory.service;
- * 
- * import static org.hamcrest.CoreMatchers.equalTo; import static
- * org.hamcrest.MatcherAssert.assertThat;
- * 
- * import org.junit.Test; import org.junit.runner.RunWith; import
- * org.springframework.beans.factory.annotation.Autowired; import
- * org.springframework.test.context.ContextConfiguration; import
- * org.springframework.test.context.junit4.SpringRunner;
- * 
- * 
- * public class MailSendTest {
- * 
- * @Autowired private MailService mailService;
- * 
- * @Test public void sendHomeUserEmailIntegrationTest() {
- * 
- * String message = "Requesting supplies for family DAVI-0001"; String subject =
- * "Subj:  Supplies for family DAVI-0001";
- * mailService.sendMail("testFrom.pcat@mailinator.com",
- * "testTo.pcat@mailinator.com", subject, message); }
- * 
- * }
- */

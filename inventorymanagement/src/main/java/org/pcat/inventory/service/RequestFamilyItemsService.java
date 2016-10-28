@@ -14,29 +14,29 @@ public class RequestFamilyItemsService {
 	@Autowired
 	private MailService mailService;
 	@Autowired
-	private HomeVisitorEmailRequestUtility requestUtility;
+	private HomeVisitorEmailRequestBO requestBO;
 	@Autowired
-	private InventoryBusinessObject inventoryBusinessObject;
+	private InventoryBO inventoryBO;
 
-	public RequestState requestItems(String familyNumber, List<RequestItem> requestItems,
-			HomeVisitor homeVisitor) {
-		List<String> itemDescriptions = inventoryBusinessObject.getItemDescriptions(requestItems);
+	public RequestState requestItems(final String familyNumber, final List<RequestItem> requestItems,
+			final HomeVisitor homeVisitor) {
+		final List<String> itemDescriptions = inventoryBO.getItemDescriptions(requestItems);
 		mailService.sendMail(homeVisitor.getEmail(), homeVisitor.getSupervisorEmail(),
-				String.format(HomeVisitorEmailRequestUtility.HOME_VISITOR_SUBJECT, familyNumber),
-				requestUtility.getMessageBody(homeVisitor.getFirstname(), homeVisitor.getLastname(), itemDescriptions));
+				String.format(HomeVisitorEmailRequestBO.HOME_VISITOR_SUBJECT, familyNumber),
+				requestBO.getMessageBody(homeVisitor.getFirstname(), homeVisitor.getLastname(), itemDescriptions));
 		return RequestState.PENDING;
 	}
 
-	public void setInventoryBusinessObject(InventoryBusinessObject inventoryBusinessObject) {
-		this.inventoryBusinessObject = inventoryBusinessObject;
+	public void setInventoryBusinessObject(InventoryBO inventoryBO) {
+		this.inventoryBO = inventoryBO;
 	}
 
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
 	}
 
-	public void setRequestUtility(HomeVisitorEmailRequestUtility requestUtility) {
-		this.requestUtility = requestUtility;
+	public void setRequestUtility(HomeVisitorEmailRequestBO requestBO) {
+		this.requestBO = requestBO;
 	}
 
 }

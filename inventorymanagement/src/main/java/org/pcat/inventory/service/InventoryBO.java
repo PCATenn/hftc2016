@@ -8,12 +8,12 @@ import org.pcat.inventory.model.Inventory;
 import org.pcat.inventory.model.RequestItem;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class InventoryBusinessObject {
+public class InventoryBO {
 
 	@Autowired
 	private InventoryDao inventoryDAO;
 
-	public InventoryBusinessObject() {
+	public InventoryBO() {
 		super();
 	}
 

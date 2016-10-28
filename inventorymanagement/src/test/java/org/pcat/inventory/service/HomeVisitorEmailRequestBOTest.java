@@ -11,9 +11,9 @@ import org.pcat.inventory.model.HomeVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HomeVisitorEmailRequestUtilityTest {
-	private static final Logger logger = LoggerFactory.getLogger(HomeVisitorEmailRequestUtilityTest.class);
-	HomeVisitorEmailRequestUtility emailUtility = new HomeVisitorEmailRequestUtility();
+public class HomeVisitorEmailRequestBOTest {
+	private static final Logger logger = LoggerFactory.getLogger(HomeVisitorEmailRequestBOTest.class);
+	HomeVisitorEmailRequestBO emailUtility = new HomeVisitorEmailRequestBO();
 
 	@Test
 	public void messageBodyBuilderTest() {

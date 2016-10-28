@@ -22,72 +22,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  *
  */
 @Repository
-public class InventoryDao implements BaseDao {
+public class InventoryDao extends BaseDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	@Autowired
-	private BaseDao baseDao;
-
-	public void delete(Object obj) {
-		baseDao.delete(obj);
-	}
-
-	/**
-	 * Method to delete inventory information.
-	 * 
-	 * @param inventory
-	 * @return
-	 */
-	public boolean deleteInventory(Inventory inventory) {
-		boolean isDeleted = false;
-		Transaction tx = null;
-		try {
-			Session session = sessionFactory.openSession();
-			tx = session.beginTransaction();
-			Criteria criteria = session.createCriteria(Inventory.class);
-			criteria.add(Restrictions.eq("id", inventory.getId()));
-			Inventory updateInventory = (Inventory) criteria.list().get(0);
-			session.delete(updateInventory);
-			isDeleted = true;
-			tx.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return isDeleted;
-	}
-
-	public <Inventory extends Object> Inventory getById(Long id) {
-		return (Inventory) baseDao.getById(id);
-	}
-
-	public List<?> findAll(Class<?> clazz) {
-		return baseDao.findAll(clazz);
-	}
-
-	public BaseDao getBaseDao() {
-		return baseDao;
-	}
 
 	public Inventory getById(long id) {
-		Session session = null;
-		Inventory inventory = null;
-		try {
-			session = sessionFactory.openSession();
-			inventory = (Inventory) session.get(Inventory.class, id);
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
-		}
-		return inventory;
+		return (Inventory) super.getById(Inventory.class, id);
+	}
+
+	public List<Inventory> findAll() {
+		return (List<Inventory>) super.findAll(Inventory.class);
 	}
 
 	public Session getSession() {
-		return baseDao.getSession();
+		return super.getSession();
 	}
 
 	/**
@@ -98,11 +47,11 @@ public class InventoryDao implements BaseDao {
 	}
 
 	public Transaction getTransaction(Session session) {
-		return baseDao.getTransaction(session);
+		return super.getTransaction(session);
 	}
 
 	public void handleException(Exception e, Transaction tx) {
-		baseDao.handleException(e, tx);
+		super.handleException(e, tx);
 	}
 
 	public List<FamilyInventory> listAllFamilyInventory() {
@@ -131,7 +80,7 @@ public class InventoryDao implements BaseDao {
 		try {
 			session = sessionFactory.openSession();
 			Criteria criteria = session.createCriteria(Inventory.class);
-			inventories = (List<Inventory>)criteria.list();
+			inventories = (List<Inventory>) criteria.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e.getMessage());
@@ -178,11 +127,7 @@ public class InventoryDao implements BaseDao {
 	}
 
 	public void saveOrUpdate(Object obj) {
-		baseDao.saveOrUpdate(obj);
-	}
-
-	public void setBaseDao(BaseDao baseDao) {
-		this.baseDao = baseDao;
+		super.saveOrUpdate(obj);
 	}
 
 	/**
@@ -218,5 +163,11 @@ public class InventoryDao implements BaseDao {
 			e.printStackTrace();
 		}
 		return isUpdated;
+	}
+
+	public boolean deleteInventory(Inventory inventory) {
+		if (1 == 1)
+			throw new RuntimeException("method not implemented");
+		return false;
 	}
 }
