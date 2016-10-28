@@ -11,7 +11,7 @@ public abstract class BaseDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	protected Object getById(Class clazz, long id) {
+	protected Object getById(Class clazz, int id) {
 		Session session = null;
 		Transaction tx = null;
 		Object result = null;
@@ -28,8 +28,9 @@ public abstract class BaseDao {
 
 		return result;
 	}
-	public abstract <T extends Object> T getById(long id);
-	
+
+	public abstract <T extends Object> T getById(int id);
+
 	public List<?> findAll(Class<?> clazz) {
 		if (1 == 1)
 			throw new RuntimeException(
@@ -54,8 +55,19 @@ public abstract class BaseDao {
 	}
 
 	public void saveOrUpdate(Object obj) {
-		throw new RuntimeException(String.format("Unemplemented call to saveOrUpdate(Object obj) in class %s.",
-				this.getClass().getName()));
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+			session = getSession();
+			tx = getTransaction(session);
+			session.saveOrUpdate(obj);
+			tx.commit();
+		} catch (Exception e) {
+			handleException(e, tx);
+		} finally {
+			session.close();
+		}
 
 	}
 

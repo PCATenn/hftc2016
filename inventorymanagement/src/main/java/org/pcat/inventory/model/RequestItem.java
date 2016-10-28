@@ -3,23 +3,23 @@ package org.pcat.inventory.model;
 public class RequestItem {
 
 	private int quantity;
-	private long id;
+	private int id;
 
 	public RequestItem() {
 		super();
 	}
-	public RequestItem(long id, int quantity) {
+	public RequestItem(int id, int quantity) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
 	}
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	public int getQuantity() {
 		return quantity;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public void setQuantity(int quantity) {

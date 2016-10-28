@@ -2,6 +2,9 @@ package org.pcat.inventory.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class HomeVisitorEmailRequestBO {
 	public static final String HOME_VISITOR_SUBJECT = "Requesting supplies for family %s";
 	public static final String HOME_VISITOR_MESSAGE = "These items have been requested by %s %s: %s";

@@ -27,12 +27,18 @@ public class InventoryDao extends BaseDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public Inventory getById(long id) {
-		return (Inventory) super.getById(Inventory.class, id);
+	public boolean deleteInventory(Inventory inventory) {
+		if (1 == 1)
+			throw new RuntimeException("method not implemented");
+		return false;
 	}
 
 	public List<Inventory> findAll() {
 		return (List<Inventory>) super.findAll(Inventory.class);
+	}
+
+	public Inventory getById(int id) {
+		return (Inventory) super.getById(Inventory.class, id);
 	}
 
 	public Session getSession() {
@@ -163,11 +169,5 @@ public class InventoryDao extends BaseDao {
 			e.printStackTrace();
 		}
 		return isUpdated;
-	}
-
-	public boolean deleteInventory(Inventory inventory) {
-		if (1 == 1)
-			throw new RuntimeException("method not implemented");
-		return false;
 	}
 }

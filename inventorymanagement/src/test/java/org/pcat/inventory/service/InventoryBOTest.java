@@ -55,7 +55,7 @@ public class InventoryBOTest {
 		for (int x = 1; x < 7; x++) {
 			Inventory req = createATestInventory(x, qtyGenerator.nextInt(16) + 4);
 			logger.debug(String.format("debug created inventory is %s", req.toString()));
-			when(dao.getById(Long.valueOf(x))).thenReturn(req);
+			when(dao.getById(x)).thenReturn(req);
 		}
 		List<RequestItem> items = new ArrayList<RequestItem>();
 		for (int x = 1; x < 7; x++) {

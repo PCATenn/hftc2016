@@ -27,13 +27,13 @@ public class RequestFamilyItemsServiceTest {
 
 	@BeforeClass
 	public static void setup() {
-		helper.saveCurrentRootLogging();
-		helper.setRootTestLoggerLevel(Level.DEBUG);
+//		helper.saveCurrentRootLogging();
+//		helper.setRootTestLoggerLevel(Level.INFO);
 	}
 
 	@AfterClass
 	public static void tearDown() {
-		helper.resetSaveRootLoggerLevel();
+//		helper.resetSaveRootLoggerLevel();
 	}
 
 	private RequestFamilyItemsService requestFamilyItemsService = new RequestFamilyItemsService();

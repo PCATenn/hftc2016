@@ -7,6 +7,7 @@ import ch.qos.logback.classic.Logger;
 
 public class TestHelper {
 
+	//TODO:  This is not threadsafe and needs refactored
 	private Level saveRootLoggerLevel = null;
 	private Level testRootLoggerLevel = null;
 
