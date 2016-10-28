@@ -21,9 +21,13 @@ public class RequestFamilyItemsService {
 	public RequestState requestItems(final String familyNumber, final List<RequestItem> requestItems,
 			final HomeVisitor homeVisitor) {
 		final List<String> itemDescriptions = inventoryBO.getItemDescriptions(requestItems);
-		mailService.sendMail(homeVisitor.getEmail(), homeVisitor.getSupervisorEmail(),
-				String.format(HomeVisitorEmailRequestBO.HOME_VISITOR_SUBJECT, familyNumber),
-				requestBO.getMessageBody(homeVisitor.getFirstname(), homeVisitor.getLastname(), itemDescriptions));
+		final String toEmail = homeVisitor.getEmail();
+		final String supervisorEmail = homeVisitor.getSupervisorEmail();
+		final String subject = String.format(HomeVisitorEmailRequestBO.HOME_VISITOR_SUBJECT, familyNumber);
+		final String firstname = homeVisitor.getFirstname();
+		final String lastname = homeVisitor.getLastname();
+		final String messageBody = requestBO.getMessageBody(firstname, lastname, itemDescriptions);
+		mailService.sendMail(toEmail, supervisorEmail, subject, messageBody);
 		return RequestState.PENDING;
 	}
 
