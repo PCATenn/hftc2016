@@ -1,5 +1,7 @@
 package org.pcat.inventory.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,11 +12,15 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class User  {
+public class User implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4241272990550941600L;
 	// Fields
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String firstname;
 	private String supervisor;
@@ -42,60 +48,32 @@ public class User  {
 
 	// Property accessors
 
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public String getEmail() {
+		return this.email;
 	}
 
 	public String getFirstname() {
 		return this.firstname;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getSupervisor() {
-		return this.supervisor;
-	}
-
-	public void setSupervisor(String supervisor) {
-		this.supervisor = supervisor;
-	}
-
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getRole() {
-		return this.role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public String getLastname() {
-		return this.lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public Integer getId() {
+		return this.id;
 	}
 
 	public String getIsactive() {
 		return this.isactive;
 	}
 
-	public void setIsactive(String isactive) {
-		this.isactive = isactive;
+	public String getLastname() {
+		return this.lastname;
+	}
+
+	public String getRole() {
+		return this.role;
+	}
+
+	public String getSupervisor() {
+		return this.supervisor;
 	}
 
 	/**
@@ -105,6 +83,34 @@ public class User  {
 		return supervisoremail;
 	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setIsactive(String isactive) {
+		this.isactive = isactive;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public void setSupervisor(String supervisor) {
+		this.supervisor = supervisor;
+	}
+
 	/**
 	 * @param supervisoremail
 	 *            the supervisoremail to set
@@ -112,8 +118,10 @@ public class User  {
 	public void setSupervisoremail(String supervisoremail) {
 		this.supervisoremail = supervisoremail;
 	}
+
 	@Override
 	public String toString() {
-		return String.format("User[id=%d, firstname='%s', lastname='%s', email='%s', supervisor='%s']", this.id, this.firstname, this.lastname, this.email, this.supervisor);
+		return String.format("User[id=%d, firstname='%s', lastname='%s', email='%s', supervisor='%s']", this.id,
+				this.firstname, this.lastname, this.email, this.supervisor);
 	}
 }
