@@ -1,5 +1,7 @@
 package org.pcat.inventory.dao;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -10,10 +12,10 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.pcat.inventory.model.FamilyInventory;
 import org.pcat.inventory.model.Inventory;
-import org.pcat.inventory.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * Class to perform User Management operations.
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  */
 @Repository
 public class InventoryDao extends BaseDao {
+	private static final Logger logger = LoggerFactory.getLogger(InventoryDao.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -38,7 +41,9 @@ public class InventoryDao extends BaseDao {
 	}
 
 	public Inventory getById(int id) {
-		return (Inventory) super.getById(Inventory.class, id);
+		final Inventory inventory = (Inventory) super.getById(Inventory.class, id);
+		logger.debug("xxxxx"+inventory);
+		return inventory;
 	}
 
 	public Session getSession() {
@@ -133,6 +138,7 @@ public class InventoryDao extends BaseDao {
 	}
 
 	public void saveOrUpdate(Object obj) {
+
 		super.saveOrUpdate(obj);
 	}
 
@@ -169,5 +175,12 @@ public class InventoryDao extends BaseDao {
 			e.printStackTrace();
 		}
 		return isUpdated;
+	}
+
+	public Collection<Inventory> getCollectionById(final Collection<Integer> ids) {
+		// TODO: Add test to the integration
+		List<Inventory> returnList = new ArrayList<Inventory>();
+		ids.forEach(id -> returnList.add(this.getById(id)));
+		return returnList;
 	}
 }
