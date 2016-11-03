@@ -1,11 +1,12 @@
 package org.pcat.inventory.service;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -39,32 +40,6 @@ public class RequestFamilyItemsServiceTest {
 
 	private RequestFamilyItemsService requestFamilyItemsService = new RequestFamilyItemsService();
 
-	// @Test
-	public void getInventory() {
-		final String familyNumber = "TEST-0001";
-		final HomeVisitor homeVisitor = new HomeVisitor("testFirstName", "testLastName", "testEmail",
-				"testSupervisorEmail");
-		final InventoryBO invBO = mock(InventoryBO.class);
-		requestFamilyItemsService.setInventoryBusinessObject(invBO);
-
-		InventoryDao mockInventoryDao = mock(InventoryDao.class);
-		requestFamilyItemsService.setInventoryDao(mockInventoryDao);
-
-		List<RequestItem> requestItems = new ArrayList<>();
-		for (int x = 1; x < 7; x++) {
-			requestItems.add(new RequestItem(x, 1));
-		}
-		List<Integer> requestItemIds = Arrays.asList(1, 2, 3, 4, 5, 6);
-		List<Inventory> mockedInventoryList = new ArrayList<Inventory>();
-		for (int x = 1; x < 7; x++) {
-			String nameAndDesc = String.format("Item %d", x);
-			mockedInventoryList.add(new Inventory(x, nameAndDesc, nameAndDesc, 12, 3, "Nashville"));
-		}
-		when(mockInventoryDao.getCollectionById(requestItemIds)).thenReturn(mockedInventoryList);
-		requestFamilyItemsService.requestItems(familyNumber, requestItems, homeVisitor);
-		verify(mockInventoryDao).getCollectionById(requestItemIds);
-	}
-
 	@Test
 	public void didMailRequestHappen() {
 		final String familyNumber = "TEST-0001";
@@ -85,16 +60,16 @@ public class RequestFamilyItemsServiceTest {
 
 		ArrayList<RequestItem> requestItems = new ArrayList<RequestItem>();
 		for (int x = 1; x < 7; x++) {
-			requestItems.add(new RequestItem(x, 1));
+			requestItems.add(new RequestItem(x, 1, null));
 		}
-
-		List<Integer> requestItemIds = Arrays.asList(1, 2, 3, 4, 5, 6);
 		List<Inventory> mockedInventoryList = new ArrayList<Inventory>();
 		for (int x = 1; x < 7; x++) {
 			String nameAndDesc = String.format("Item %d", x);
 			mockedInventoryList.add(new Inventory(x, nameAndDesc, nameAndDesc, 12, 3, "Nashville"));
 		}
-		when(mockInventoryDao.getCollectionById(requestItemIds)).thenReturn(mockedInventoryList);
+		for (int x = 0; x < 6; x++) {
+			when(mockInventoryDao.getById(x + 1)).thenReturn(mockedInventoryList.get(x));
+		}
 
 		List<String> items = new ArrayList<String>();
 		for (int x = 1; x < 7; x++) {
@@ -115,10 +90,13 @@ public class RequestFamilyItemsServiceTest {
 
 		requestFamilyItemsService.requestItems(familyNumber, requestItems, homeVisitor);
 		/* Test that the inventory items were requested properly */
-		verify(mockInventoryDao).getCollectionById(requestItemIds);
+		for (int x = 1; x < 7; x++) {
+			verify(mockInventoryDao).getById(x);
+		}
+		/* Test the requestItems have the right inventory attached */
+		requestItems.forEach(item -> assertThat(item.getId(), equalTo(item.getRequestInventory().getId())));
 		/* Test that the email was requested properly */
 		verify(ms).sendMail(homeVisitor.getEmail(), homeVisitor.getSupervisorEmail(), testSubject,
 				testMessage.toString());
 	}
-
 }

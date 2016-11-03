@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.pcat.inventory.dao.InventoryDao;
+import org.pcat.inventory.model.FamilyInventory;
 import org.pcat.inventory.model.HomeVisitor;
 import org.pcat.inventory.model.Inventory;
 import org.pcat.inventory.model.RequestItem;
@@ -25,10 +26,19 @@ public class RequestFamilyItemsService {
 
 	public RequestState requestItems(final String familyNumber, final List<RequestItem> requestItems,
 			final HomeVisitor homeVisitor) {
-		
+
 		/* get inventory */
-		Collection<Inventory> inventory = getInventory(requestItems);
+		updateRequestItemsWithInventory(requestItems);
 		/* create family inventory records */
+		/*
+		 * create a map of inventory records to get the inventory items out of
+		 * it to get the fam request right need to match the request items to
+		 * the inventory records to create the fam request record
+		 * 
+		 * maybe create a utility object to hold the data?
+		 * 
+		 */
+		List<FamilyInventory> familyInventory = new ArrayList<>();
 		/* update inventory records */
 		/* send email */
 		final List<String> itemDescriptions = inventoryBO.getItemDescriptions(requestItems);
@@ -42,10 +52,12 @@ public class RequestFamilyItemsService {
 		return RequestState.PENDING;
 	}
 
-	private Collection<Inventory> getInventory(final List<RequestItem> requestItems) {
-		List<Integer> requestIds = new ArrayList<>();
-		requestItems.forEach(item -> requestIds.add(item.getId()));
-		 return inventoryDao.getCollectionById(requestIds);
+	private void updateRequestItemsWithInventory(final List<RequestItem> requestItems) {
+		requestItems.forEach(requestItem -> updateRequestItemWithInventory(requestItem));
+	}
+
+	private void updateRequestItemWithInventory(RequestItem requestItem) {
+		requestItem.setRequestInventory(inventoryDao.getById(requestItem.getId()));
 	}
 
 	public void setInventoryBusinessObject(InventoryBO inventoryBO) {

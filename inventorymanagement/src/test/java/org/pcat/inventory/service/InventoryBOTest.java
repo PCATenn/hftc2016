@@ -59,7 +59,7 @@ public class InventoryBOTest {
 		}
 		List<RequestItem> items = new ArrayList<RequestItem>();
 		for (int x = 1; x < 7; x++) {
-			RequestItem item = new RequestItem(x, 1);
+			RequestItem item = new RequestItem(x, 1, null);
 			logger.debug(String.format("adding %s to items list ", item.toString()));
 			items.add(item);
 		}
