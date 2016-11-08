@@ -3,9 +3,11 @@ package org.pcat.inventory.service;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.pcat.inventory.TestHelper;
+import org.pcat.inventory.dao.FamilyInventoryDao;
 import org.pcat.inventory.dao.InventoryDao;
+import org.pcat.inventory.model.FamilyInventory;
 import org.pcat.inventory.model.HomeVisitor;
 import org.pcat.inventory.model.Inventory;
 import org.pcat.inventory.model.RequestItem;
@@ -49,6 +53,9 @@ public class RequestFamilyItemsServiceTest {
 		InventoryDao mockInventoryDao = mock(InventoryDao.class);
 		requestFamilyItemsService.setInventoryDao(mockInventoryDao);
 
+		FamilyInventoryDao mockFamilyInventoryDao = mock(FamilyInventoryDao.class);
+		requestFamilyItemsService.setFamilyInventoryDao(mockFamilyInventoryDao);
+		
 		final MailService ms = mock(MailService.class);
 		requestFamilyItemsService.setMailService(ms);
 
@@ -62,15 +69,21 @@ public class RequestFamilyItemsServiceTest {
 		for (int x = 1; x < 7; x++) {
 			requestItems.add(new RequestItem(x, 1, null));
 		}
+		/* Inventory retrieval and family inventory data verification setup  */
 		List<Inventory> mockedInventoryList = new ArrayList<Inventory>();
+		List<FamilyInventory> mockedFamilyInventories = new ArrayList<>();
+		LocalDateTime dt = LocalDateTime.of(1980, 11, 4, 21, 00);
 		for (int x = 1; x < 7; x++) {
 			String nameAndDesc = String.format("Item %d", x);
 			mockedInventoryList.add(new Inventory(x, nameAndDesc, nameAndDesc, 12, 3, "Nashville"));
+			mockedFamilyInventories.add(new FamilyInventory(null, familyNumber,"Pending",1,dt,x));
 		}
 		for (int x = 0; x < 6; x++) {
 			when(mockInventoryDao.getById(x + 1)).thenReturn(mockedInventoryList.get(x));
+			when(mockFamilyInventoryDao.getById(x + 1)).thenReturn(mockedFamilyInventories.get(x));
 		}
-
+		/* Family inventory request verification object */
+		/* Email list setup */
 		List<String> items = new ArrayList<String>();
 		for (int x = 1; x < 7; x++) {
 			items.add(String.format("Item %d", x));
@@ -90,13 +103,18 @@ public class RequestFamilyItemsServiceTest {
 
 		requestFamilyItemsService.requestItems(familyNumber, requestItems, homeVisitor);
 		/* Test that the inventory items were requested properly */
+		/* Test that the request to create the family inventory was correctly */
 		for (int x = 1; x < 7; x++) {
 			verify(mockInventoryDao).getById(x);
 		}
+		/* Test that the family inventory requests are created correctly */
+		verify(mockFamilyInventoryDao, times(6)).saveOrUpdate(mockedFamilyInventories.get(0));
 		/* Test the requestItems have the right inventory attached */
 		requestItems.forEach(item -> assertThat(item.getId(), equalTo(item.getRequestInventory().getId())));
 		/* Test that the email was requested properly */
 		verify(ms).sendMail(homeVisitor.getEmail(), homeVisitor.getSupervisorEmail(), testSubject,
 				testMessage.toString());
+		
+		/* Test that the  inventory  are updated correctly */
 	}
 }

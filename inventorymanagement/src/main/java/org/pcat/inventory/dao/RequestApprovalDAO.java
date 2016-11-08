@@ -1,19 +1,16 @@
 package org.pcat.inventory.dao;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
 import org.pcat.inventory.model.FamilyInventory;
-import org.pcat.inventory.model.Inventory;
 import org.pcat.inventory.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -160,8 +157,7 @@ public class RequestApprovalDAO {
 			familyInventory.setQuantity(quantity);
 			familyInventory.setStatus("pending");
 			familyInventory.setInventoryId(inventoryId);
-			Timestamp requestedDate = new Timestamp(System.currentTimeMillis());
-			familyInventory.setRequestedDate(requestedDate);
+			familyInventory.setRequestedDate(LocalDateTime.now());
 			saveFamilyInventory(familyInventory);
 
 			tx.commit();

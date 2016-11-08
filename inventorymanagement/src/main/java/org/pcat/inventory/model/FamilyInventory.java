@@ -1,25 +1,40 @@
 package org.pcat.inventory.model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * FamilyInventory entity. @author MyEclipse Persistence Tools
  */
 
 public class FamilyInventory implements java.io.Serializable {
-
-	// Fields
-
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private Integer id;
+
 	private String familyId;
 	private String status;
 	private Integer quantity;
-	private Timestamp requestedDate;
+	private LocalDateTime requestedDate;
 	private Integer inventoryId;
+
+	public FamilyInventory() {
+		super();
+	}
+	// Fields
+
+	public FamilyInventory(Integer id, String familyId, String status, Integer quantity, LocalDateTime localDateTime,
+			Integer inventoryId) {
+		super();
+		this.id = id;
+		this.familyId = familyId;
+		this.status = status;
+		this.quantity = quantity;
+		this.requestedDate = localDateTime;
+		this.inventoryId = inventoryId;
+	}
 
 	// Property accessors
 
@@ -54,14 +69,14 @@ public class FamilyInventory implements java.io.Serializable {
 	}
 
 	public Integer getInventoryId() {
-	    return inventoryId;
+		return inventoryId;
 	}
 
 	public Integer getQuantity() {
 		return this.quantity;
 	}
 
-	public Timestamp getRequestedDate() {
+	public LocalDateTime getRequestedDate() {
 		return this.requestedDate;
 	}
 
@@ -88,17 +103,15 @@ public class FamilyInventory implements java.io.Serializable {
 		this.id = id;
 	}
 
-
-
 	public void setInventoryId(Integer inventoryId) {
-	    this.inventoryId = inventoryId;
+		this.inventoryId = inventoryId;
 	}
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
-	public void setRequestedDate(Timestamp requestedDate) {
+	public void setRequestedDate(LocalDateTime requestedDate) {
 		this.requestedDate = requestedDate;
 	}
 

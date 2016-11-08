@@ -42,7 +42,6 @@ public class InventoryDao extends BaseDao {
 
 	public Inventory getById(int id) {
 		final Inventory inventory = (Inventory) super.getById(Inventory.class, id);
-		logger.debug("xxxxx"+inventory);
 		return inventory;
 	}
 
