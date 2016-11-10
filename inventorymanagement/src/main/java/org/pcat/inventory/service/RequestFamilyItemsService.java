@@ -1,6 +1,5 @@
 package org.pcat.inventory.service;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -43,11 +42,11 @@ public class RequestFamilyItemsService {
 	public RequestState requestItems(final String familyNumber, final List<RequestItem> requestItems,
 			final HomeVisitor homeVisitor) {
 
-		/* get inventory */
-		updateInventoryAndUpdateRequestItemWithInventory(requestItems);
+		/* get inventory, update inventory */
+		processRequestAndInventories(requestItems);
 		/* create family inventory records */
 		updateFamilyInventory(requestItems, familyNumber, homeVisitor);
-		/* update inventory records */
+		/* send the email to the supervisor */
 		sendRequestEmail(familyNumber, requestItems, homeVisitor);
 		return RequestState.PENDING;
 	}
@@ -90,17 +89,18 @@ public class RequestFamilyItemsService {
 
 	}
 
-	private void updateInventoryAndUpdateRequestItemWithInventory(final List<RequestItem> requestItems) {
-		requestItems.forEach(requestItem -> updateRequestItemWithInventory(requestItem));
+	private void processRequestAndInventories(final List<RequestItem> requestItems) {
+		requestItems.forEach(requestItem -> updateInventoryWithRequest(requestItem));
 	}
 
-	private void updateRequestItemWithInventory(RequestItem requestItem) {
+	private void updateInventoryWithRequest(RequestItem requestItem) {
 		Inventory inventory = inventoryDao.getById(requestItem.getId());
 		final Integer totalInventory = inventory.getTotalInventory();
 		Integer reservedInventory = inventory.getReservedInventory();
 		final int requestQuantity = requestItem.getQuantity();
 		if (totalInventory > reservedInventory + requestQuantity) {
 			inventory.setReservedInventory(reservedInventory + requestQuantity);
+			inventoryDao.saveOrUpdate(inventory);
 		} else {
 			throw new RuntimeException(String.format(
 					"Request qty of %d plus already reserved qty of %d is greater than the available qty of %d",

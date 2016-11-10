@@ -45,7 +45,7 @@ public class RequestFamilyItemsServiceTest {
 	private RequestFamilyItemsService requestFamilyItemsService = new RequestFamilyItemsService();
 
 	@Test
-	public void didMailRequestHappen() {
+	public void requestItemsTest() {
 		final String familyNumber = "TEST-0001";
 		final HomeVisitor homeVisitor = new HomeVisitor("testFirstName", "testLastName", "testEmail",
 				"testSupervisorEmail");
@@ -110,11 +110,20 @@ public class RequestFamilyItemsServiceTest {
 		/* Test that the family inventory requests are created correctly */
 		verify(mockFamilyInventoryDao, times(6)).saveOrUpdate(mockedFamilyInventories.get(0));
 		/* Test the requestItems have the right inventory attached */
-		requestItems.forEach(item -> assertThat(item.getId(), equalTo(item.getRequestInventory().getId())));
+		requestItems.forEach(item -> assertThat(verifyInventoryItem(item, mockInventoryDao), equalTo(true)));
 		/* Test that the email was requested properly */
 		verify(ms).sendMail(homeVisitor.getEmail(), homeVisitor.getSupervisorEmail(), testSubject,
 				testMessage.toString());
 		
 		/* Test that the  inventory  are updated correctly */
+	}
+
+	private boolean verifyInventoryItem(RequestItem item, InventoryDao mockInventoryDao) {
+		final Inventory inventory = item.getRequestInventory();
+		assertThat(item.getId(), equalTo(inventory.getId()));
+		assertThat(inventory.getReservedInventory(), equalTo(4));
+		assertThat(inventory.getTotalInventory(), equalTo(12));
+		verify(mockInventoryDao).saveOrUpdate(inventory);
+		return true;
 	}
 }
