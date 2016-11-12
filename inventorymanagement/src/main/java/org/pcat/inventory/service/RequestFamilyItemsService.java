@@ -1,6 +1,7 @@
 package org.pcat.inventory.service;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 import org.pcat.inventory.dao.FamilyInventoryDao;
@@ -30,7 +31,7 @@ public class RequestFamilyItemsService {
 
 	private void createFamilyInventory(final RequestItem requestItem, String familyNumber, HomeVisitor homeVisitor) {
 		FamilyInventory item = new FamilyInventory(null, familyNumber, "Pending", requestItem.getQuantity(),
-				LocalDateTime.now(), requestItem.getRequestInventory().getId());
+				new Timestamp(Instant.now().getEpochSecond()), requestItem.getRequestInventory().getId());
 		familyInventoryDao.saveOrUpdate(item);
 	}
 
@@ -54,13 +55,14 @@ public class RequestFamilyItemsService {
 	private void sendRequestEmail(final String familyNumber, final List<RequestItem> requestItems,
 			final HomeVisitor homeVisitor) {
 		final List<String> itemDescriptions = inventoryBO.getItemDescriptions(requestItems);
-		final String toEmail = homeVisitor.getEmail();
+		final String cc = homeVisitor.getEmail();
+		final String toEmail = cc;
 		final String supervisorEmail = homeVisitor.getSupervisorEmail();
 		final String subject = String.format(HomeVisitorEmailRequestBO.HOME_VISITOR_SUBJECT, familyNumber);
 		final String firstname = homeVisitor.getFirstname();
 		final String lastname = homeVisitor.getLastname();
 		final String messageBody = requestBO.getMessageBody(firstname, lastname, itemDescriptions);
-		mailService.sendMail(toEmail, supervisorEmail, subject, messageBody);
+		mailService.sendMail(toEmail, supervisorEmail, cc, subject, messageBody);
 	}
 
 	public void setFamilyInventoryDao(FamilyInventoryDao familyInventoryDao) {

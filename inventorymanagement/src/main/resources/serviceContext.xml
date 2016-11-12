@@ -28,6 +28,7 @@
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<!-- <property name="initialSize" value="3" /> -->
+		<property name="defaultAutoCommit" value="false" /> 
 	</bean>
 
 	<bean id="sessionFactory"

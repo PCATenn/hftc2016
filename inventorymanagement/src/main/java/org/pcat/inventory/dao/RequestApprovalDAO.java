@@ -1,5 +1,7 @@
 package org.pcat.inventory.dao;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 import org.hibernate.Criteria;
@@ -76,7 +78,7 @@ public class RequestApprovalDAO {
 			familyInventory.setStatus("Approved");
 			session.update(familyInventory);
 			tx.commit();
-			//sendNotification(userId, familyInventory);
+			// sendNotification(userId, familyInventory);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -100,7 +102,7 @@ public class RequestApprovalDAO {
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.add(Restrictions.eq("id", userId));
 			User user = (User) criteria.list().get(0);
-			
+
 			String email = user.getEmail();
 			completedApproval = true;
 			tx.commit();
@@ -157,17 +159,17 @@ public class RequestApprovalDAO {
 			familyInventory.setQuantity(quantity);
 			familyInventory.setStatus("pending");
 			familyInventory.setInventoryId(inventoryId);
-			familyInventory.setRequestedDate(LocalDateTime.now());
+			familyInventory.setRequestedDate(new Timestamp(Instant.now().getEpochSecond()));
 			saveFamilyInventory(familyInventory);
 
 			tx.commit();
 
-//			// send notification to the supervisor
-//			Criteria criteria = session.createCriteria(User.class);
-//			criteria.add(Restrictions.eq("id", userId));
-//			User user = (User) criteria.list().get(0);
-//			String supervisorIdStr = user.getSupervisoremail();
-//			sendNotification(supervisorId, familyInventory);
+			// // send notification to the supervisor
+			// Criteria criteria = session.createCriteria(User.class);
+			// criteria.add(Restrictions.eq("id", userId));
+			// User user = (User) criteria.list().get(0);
+			// String supervisorIdStr = user.getSupervisoremail();
+			// sendNotification(supervisorId, familyInventory);
 
 			isSubmited = true;
 		} catch (Exception e) {

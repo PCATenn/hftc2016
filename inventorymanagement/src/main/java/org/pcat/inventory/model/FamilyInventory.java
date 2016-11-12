@@ -1,6 +1,6 @@
 package org.pcat.inventory.model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 /**
  * FamilyInventory entity. @author MyEclipse Persistence Tools
@@ -17,7 +17,7 @@ public class FamilyInventory implements java.io.Serializable {
 	private String familyId;
 	private String status;
 	private Integer quantity;
-	private LocalDateTime requestedDate;
+	private Timestamp requestedDate;
 	private Integer inventoryId;
 
 	public FamilyInventory() {
@@ -25,7 +25,7 @@ public class FamilyInventory implements java.io.Serializable {
 	}
 	// Fields
 
-	public FamilyInventory(Integer id, String familyId, String status, Integer quantity, LocalDateTime localDateTime,
+	public FamilyInventory(Integer id, String familyId, String status, Integer quantity, Timestamp localDateTime,
 			Integer inventoryId) {
 		super();
 		this.id = id;
@@ -76,7 +76,7 @@ public class FamilyInventory implements java.io.Serializable {
 		return this.quantity;
 	}
 
-	public LocalDateTime getRequestedDate() {
+	public Timestamp getRequestedDate() {
 		return this.requestedDate;
 	}
 
@@ -111,7 +111,7 @@ public class FamilyInventory implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	public void setRequestedDate(LocalDateTime requestedDate) {
+	public void setRequestedDate(Timestamp requestedDate) {
 		this.requestedDate = requestedDate;
 	}
 

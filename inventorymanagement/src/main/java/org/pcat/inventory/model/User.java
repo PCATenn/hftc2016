@@ -22,50 +22,49 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private String firstname;
+	private String firstName;
 	private String supervisor;
-	private String supervisoremail;
+	private String supervisorEmail;
 	private String email;
 	private String role;
-	private String lastname;
-	private String isactive;
+	private String lastName;
+	private boolean isActive;
 
-	// Constructors
-
-	/** default constructor */
 	public User() {
+		super();
 	}
 
-	/** full constructor */
-	public User(String firstname, String supervisor, String email, String role, String lastname, String isactive) {
-		this.firstname = firstname;
+	public User(Integer id, String firstName, String lastName, String email, String role, String supervisor,
+			String supervisorEmail, boolean isActive) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
 		this.supervisor = supervisor;
+		this.supervisorEmail = supervisorEmail;
 		this.email = email;
 		this.role = role;
-		this.lastname = lastname;
-		this.isactive = isactive;
+		this.lastName = lastName;
+		this.isActive = isActive;
 	}
-
-	// Property accessors
 
 	public String getEmail() {
 		return this.email;
 	}
 
 	public String getFirstname() {
-		return this.firstname;
+		return this.firstName;
 	}
 
 	public Integer getId() {
 		return this.id;
 	}
 
-	public String getIsactive() {
-		return this.isactive;
+	public boolean getIsactive() {
+		return this.isActive;
 	}
 
 	public String getLastname() {
-		return this.lastname;
+		return this.lastName;
 	}
 
 	public String getRole() {
@@ -76,11 +75,8 @@ public class User implements Serializable {
 		return this.supervisor;
 	}
 
-	/**
-	 * @return the supervisoremail
-	 */
 	public String getSupervisoremail() {
-		return supervisoremail;
+		return supervisorEmail;
 	}
 
 	public void setEmail(String email) {
@@ -88,19 +84,19 @@ public class User implements Serializable {
 	}
 
 	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+		this.firstName = firstname;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public void setIsactive(String isactive) {
-		this.isactive = isactive;
+	public void setIsactive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public void setLastname(String lastname) {
-		this.lastname = lastname;
+		this.lastName = lastname;
 	}
 
 	public void setRole(String role) {
@@ -116,12 +112,12 @@ public class User implements Serializable {
 	 *            the supervisoremail to set
 	 */
 	public void setSupervisoremail(String supervisoremail) {
-		this.supervisoremail = supervisoremail;
+		this.supervisorEmail = supervisoremail;
 	}
 
 	@Override
 	public String toString() {
 		return String.format("User[id=%d, firstname='%s', lastname='%s', email='%s', supervisor='%s']", this.id,
-				this.firstname, this.lastname, this.email, this.supervisor);
+				this.firstName, this.lastName, this.email, this.supervisor, this.isActive);
 	}
 }

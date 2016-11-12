@@ -7,7 +7,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class RequestFamilyItemsServiceTest {
 
 		FamilyInventoryDao mockFamilyInventoryDao = mock(FamilyInventoryDao.class);
 		requestFamilyItemsService.setFamilyInventoryDao(mockFamilyInventoryDao);
-		
+
 		final MailService ms = mock(MailService.class);
 		requestFamilyItemsService.setMailService(ms);
 
@@ -69,14 +70,14 @@ public class RequestFamilyItemsServiceTest {
 		for (int x = 1; x < 7; x++) {
 			requestItems.add(new RequestItem(x, 1, null));
 		}
-		/* Inventory retrieval and family inventory data verification setup  */
+		/* Inventory retrieval and family inventory data verification setup */
 		List<Inventory> mockedInventoryList = new ArrayList<Inventory>();
 		List<FamilyInventory> mockedFamilyInventories = new ArrayList<>();
-		LocalDateTime dt = LocalDateTime.of(1980, 11, 4, 21, 00);
+		final Timestamp ts = new Timestamp(Instant.now().getEpochSecond());
 		for (int x = 1; x < 7; x++) {
 			String nameAndDesc = String.format("Item %d", x);
 			mockedInventoryList.add(new Inventory(x, nameAndDesc, nameAndDesc, 12, 3, "Nashville"));
-			mockedFamilyInventories.add(new FamilyInventory(null, familyNumber,"Pending",1,dt,x));
+			mockedFamilyInventories.add(new FamilyInventory(null, familyNumber, "Pending", 1, ts, x));
 		}
 		for (int x = 0; x < 6; x++) {
 			when(mockInventoryDao.getById(x + 1)).thenReturn(mockedInventoryList.get(x));
@@ -112,10 +113,10 @@ public class RequestFamilyItemsServiceTest {
 		/* Test the requestItems have the right inventory attached */
 		requestItems.forEach(item -> assertThat(verifyInventoryItem(item, mockInventoryDao), equalTo(true)));
 		/* Test that the email was requested properly */
-		verify(ms).sendMail(homeVisitor.getEmail(), homeVisitor.getSupervisorEmail(), testSubject,
-				testMessage.toString());
-		
-		/* Test that the  inventory  are updated correctly */
+		verify(ms).sendMail(homeVisitor.getEmail(), homeVisitor.getSupervisorEmail(), homeVisitor.getEmail(),
+				testSubject, testMessage.toString());
+
+		/* Test that the inventory are updated correctly */
 	}
 
 	private boolean verifyInventoryItem(RequestItem item, InventoryDao mockInventoryDao) {

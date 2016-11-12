@@ -30,12 +30,6 @@ public class InventoryDao extends BaseDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public boolean deleteInventory(Inventory inventory) {
-		if (1 == 1)
-			throw new RuntimeException("method not implemented");
-		return false;
-	}
-
 	public List<Inventory> findAll() {
 		return (List<Inventory>) super.findAll(Inventory.class);
 	}
@@ -182,4 +176,5 @@ public class InventoryDao extends BaseDao {
 		ids.forEach(id -> returnList.add(this.getById(id)));
 		return returnList;
 	}
+
 }

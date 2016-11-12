@@ -56,7 +56,7 @@ public class InventoryManagementService {
 	 * @return
 	 */
 	public boolean deleteInventory(Inventory inventory) {
-		return inventoryDao.deleteInventory(inventory);
+		return inventoryDao.delete(inventory);
 	}
 	
 	public List<Inventory> listAllInventory(){

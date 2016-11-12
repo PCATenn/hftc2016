@@ -13,23 +13,23 @@
         <property name="firstname" type="java.lang.String">
             <column name="firstname" />
         </property>
+        <property name="lastname" type="java.lang.String">
+            <column name="lastname" length="45" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" />
+        </property>
         <property name="supervisor" type="java.lang.String">
             <column name="supervisor" />
         </property>
          <property name="supervisoremail" type="java.lang.String">
             <column name="supervisor_email" />
         </property>
-        <property name="email" type="java.lang.String">
-            <column name="email" />
-        </property>
         <property name="role" type="java.lang.String">
             <column name="role" length="45" />
         </property>
-        <property name="lastname" type="java.lang.String">
-            <column name="lastname" length="45" />
-        </property>
-        <property name="isactive" type="java.lang.String">
-            <column name="isactive" length="45" />
+        <property name="isactive" type="java.lang.Boolean">
+            <column name="isactive"/>
         </property>
     </class>
 </hibernate-mapping>

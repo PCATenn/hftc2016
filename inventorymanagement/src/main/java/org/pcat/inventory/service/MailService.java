@@ -11,7 +11,8 @@ public class MailService {
 	@Autowired
 	private MailSender mailSender;
 
-	public void sendMail(String from, String to, String subject, String message) {
+	public void sendMail(final String from, final String to, final String cc, final String subject,
+			final String message) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setFrom(from);
 		mailMessage.setTo(to);

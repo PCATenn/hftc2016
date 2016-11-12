@@ -1,13 +1,12 @@
 package org.pcat.inventory.dao;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.isIn;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import org.hamcrest.Matcher;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -58,7 +57,6 @@ public class InventoryDaoIntegrationTest {
 			createdIds.add(insertInv.getId());
 		}
 		Collection<Inventory> inventory = inventoryDao.getCollectionById(createdIds.subList(12, 18));
-		
 
 		inventory.forEach(invent -> logger.debug(String.format("collection inventory : %s", invent.toString())));
 		List<String> prodNames = new ArrayList<>();
@@ -71,6 +69,7 @@ public class InventoryDaoIntegrationTest {
 			logger.debug(String.format("testing item name - %s", item.getProductName()));
 			assertThat(item.getProductName(), isIn(prodNames));
 		}
+//		throw new RuntimeException("just to see if it rolls back");
 	}
 
 }
