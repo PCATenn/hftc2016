@@ -1,8 +1,15 @@
 package org.pcat.inventory.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.pcat.inventory.model.HomeVisitor;
 import org.pcat.inventory.service.RequestApprovalService;
+import org.pcat.inventory.service.RequestFamilyItemsService;
+import org.pcat.inventory.service.UserService;
+import org.pcat.inventory.model.RequestItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +22,10 @@ public class RequestApprovalController {
 
 	@Autowired
 	private RequestApprovalService requestApprovalService;
+	@Autowired
+	private RequestFamilyItemsService requestFamilyItemsService;
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * @return the RequestApprovalService
@@ -67,7 +78,11 @@ public class RequestApprovalController {
 		if(requestQty != null && !requestQty.trim().isEmpty()) {
 			quantity = Integer.valueOf(request.getParameter("quantity"));
 		}
-		requestApprovalService.submitRequests(userId, familyId, inventoryId, quantity);
+//		requestApprovalService.submitRequests(userId, familyId, inventoryId, quantity);
+		List<RequestItem> requestItems = new ArrayList<>();
+		requestItems.add(new RequestItem(inventoryId, quantity, null));
+		HomeVisitor homeVisitor = userService.getHomeVisitor(userId);
+		requestFamilyItemsService.requestItems(familyId, requestItems, homeVisitor);
 		return new ModelAndView("confirm-request.jsp");
 	}
 }

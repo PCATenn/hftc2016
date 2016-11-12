@@ -50,9 +50,9 @@ public class LoginController {
 		logger.info("User is... {}", user);
 		String forward = null;
 		if (user != null) {
-			if (user.getRole().contains("admin")) {
+			if (user.getRole().toLowerCase().contains("admin")) {
 				forward = "listAllUsers.jsp";
-			} else if (user.getRole().contains("supervisor")) {
+			} else if (user.getRole().toLowerCase().contains("supervisor")) {
 				forward = "review-approvals.jsp";
 			} else {
 				forward = "request.jsp";

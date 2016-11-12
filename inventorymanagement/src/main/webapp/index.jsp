@@ -26,21 +26,15 @@
             </h1>
 
             <div class="login-card">
-                <form class="login-form" action="loginPage"> 
-                    <input type="email"
-                           class="login-input"
-                           value=""
-                           spellcheck="false"
-                           name="email" 
-                           id="email"
-                           placeholder="Enter your email address"
-                           autofocus>
-                    <button name="submit" class="button big-button affirmative">
-                        Submit
-                    </button>
-                </form>
+				<form class="login-form" action="loginPage">
+					<input type="email" class="login-input" value="" spellcheck="false"
+						name="email" id="email" placeholder="Enter your email address"
+						autofocus>
+					<button name="submit" class="button big-button affirmative">
+						Submit</button>
+				</form>
 
-            </div>
+			</div>
 
         </div>
     </section>

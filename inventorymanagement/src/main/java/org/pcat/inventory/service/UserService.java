@@ -11,13 +11,23 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
-	public HomeVisitor getHomeVisitor(String emailAddress) {
-		User user = userDao.getByEmailId(emailAddress);
+	private HomeVisitor buildHomeVisitor(User user) {
 		return new HomeVisitor(user.getFirstname(), user.getLastname(), user.getEmail(), user.getSupervisoremail());
+	}
+
+	public HomeVisitor getHomeVisitor(int userId) {
+		User user = userDao.getById(userId);
+		return buildHomeVisitor(user);
+	}
+
+	public HomeVisitor getHomeVisitorByEmailAddress(String emailAddress) {
+		User user = userDao.getByEmailId(emailAddress);
+		return buildHomeVisitor(user);
 	}
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+
 
 }

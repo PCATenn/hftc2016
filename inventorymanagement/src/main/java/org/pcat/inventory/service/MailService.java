@@ -16,6 +16,7 @@ public class MailService {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setFrom(from);
 		mailMessage.setTo(to);
+		mailMessage.setCc(cc);
 		mailMessage.setSubject(subject);
 		mailMessage.setText(message);
 		mailSender.send(mailMessage);
