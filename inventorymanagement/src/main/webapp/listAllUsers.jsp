@@ -50,48 +50,53 @@
 </head>
 <body>
 
-<form>
-		<input type="hidden" name="id" id="id" value="3"/>
-		<input type="hidden" name="productName" id="productName" value="Car Seat"/>
-		<input type="hidden" name="productDesc" id="productDesc" value="Infant"/>
-		<input type="hidden" name="location" id="location" value="Nashville"/>
-		<input type="hidden" name="totalInventory" id="totalInventory" value="3"/>
-		<input type="hidden" name="userId" id="userId" value="${user.id}"/>
-	<nav>
-		<a href="http://www.pcat.org/"> <img
-			src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
-		</a>
+	<div class="content">
+		<form>
+				<input type="hidden" name="id" id="id" value="3"/>
+				<input type="hidden" name="productName" id="productName" value="Car Seat"/>
+				<input type="hidden" name="productDesc" id="productDesc" value="Infant"/>
+				<input type="hidden" name="location" id="location" value="Nashville"/>
+				<input type="hidden" name="totalInventory" id="totalInventory" value="3"/>
+				<input type="hidden" name="userId" id="userId" value="${user.id}"/>
+			<nav>
+				<a href="http://www.pcat.org/"> <img
+					src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
+				</a>
 
-		<button name="logout" class="button logout-button neutral">
-			Log out</button>
-	</nav>
+				<button name="logout" class="button logout-button neutral">
+					Log out</button>
+			</nav>
 
-	<section>
-		<div class="section-body">
-			<h1>Manage users</h1>
+			<section>
+				<div class="section-body">
+					<h1>Manage users</h1>
 
 
-			<table id="dataTable" class="dummy-inventory">
-				<thead>
-					<tr>
-						<th >User Id</th>
-						<th >First Name</th>
-						<th >Last Name</th>
-						<th >Email</th>
-						<th >Role</th>
-						<th >Supervisor</th>
-						<th >Supervisor Email</th>
-						<th ></th>
-					</tr>
-				</thead>
-			</table>
+					<table id="dataTable" class="dummy-inventory">
+						<thead>
+							<tr>
+								<th >User Id</th>
+								<th >First Name</th>
+								<th >Last Name</th>
+								<th >Email</th>
+								<th >Role</th>
+								<th >Supervisor</th>
+								<th >Supervisor Email</th>
+								<th ></th>
+							</tr>
+						</thead>
+					</table>
 
- 			<input type="button" name="submit" value="Add a user" onclick="dothis('add')" class="button medium-button affirmative"/>
- 			
-		</div>
-	</section>
+					<input type="button" name="submit" value="Add a user" onclick="dothis('add')" class="button medium-button affirmative"/>
 
-	<footer> Prevent Child Abuse Tennessee </footer>
-</form>
+				</div>
+			</section>
+		</form>
+	</div>
+
+	<footer>
+		Prevent Child Abuse Tennessee
+	</footer>
+
 </body>
 </html>

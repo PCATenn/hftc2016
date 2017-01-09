@@ -33,6 +33,13 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/pcat?useSSL=false" />
 -->
+
+ <!-- 
+ 		<property name="url"
+			value="jdbc:mysql://aakgwj8rgpuot0.cg1pejs3vq92.us-east-1.rds.amazonaws.com:3306/pcat?useSSL=false" />  
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/pcat?useSSL=false" />
+			-->
 		<property name="password" value="masterUsername" />
 		<property name="initialSize" value="10" /> 
 		<property name="defaultAutoCommit" value="false" />

@@ -2,6 +2,14 @@ html {
     font: 12px "Helvetica", sans-serif;
 }
 
+body {
+    margin: 0;
+}
+
+.content {
+    min-height: calc(100vh - 50px - 3rem);
+}
+
 h1 {
     font-weight: normal;
     font-size: 3.5rem;
@@ -106,10 +114,8 @@ footer {
     font-size: 1.5rem;
     background-color: #5c707b;                  /* pcat dark gray */
     color: white;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    height: 20px;
+    margin-top: 30px;
     padding: 1.5rem;
     text-align: center;
 }

@@ -9,25 +9,28 @@
 </head>
 <body>
 
-    <nav>
-        <a href="http://www.pcat.org/">
-            <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
-        </a>
-        <button name="logout" class="button logout-button neutral">
-            Log out
-        </button>
-    </nav>
+    <div class="content">
+        <nav>
+            <a href="http://www.pcat.org/">
+                <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
+            </a>
+            <button name="logout" class="button logout-button neutral">
+                Log out
+            </button>
+        </nav>
 
-    <section>
-        <div class="section-body">
-            <h1>
-                Add an inventory item
-            </h1>
-        </div>
-    </section>
+        <section>
+            <div class="section-body">
+                <h1>
+                    Add an inventory item
+                </h1>
+            </div>
+        </section>
+    </div>
 
     <footer>
         Prevent Child Abuse Tennessee
     </footer>
+
 </body>
 </html>

@@ -18,60 +18,62 @@
 </head>
 <body>
 
-	<nav>
-		
-		<a href="http://www.pcat.org/"> <img
-			src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
-		</a>
+	<div class="content">
+		<nav>
 
-		<button name="logout" class="button logout-button neutral">
-			Log out</button>
-	</nav>
+			<a href="http://www.pcat.org/"> <img
+				src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
+			</a>
 
-	<section>
-		<div class="section-body">
-		<p> </p>
-			<h1>Request items from our inventory</h1>
+			<button name="logout" class="button logout-button neutral">
+				Log out</button>
+		</nav>
 
-			<form action="foo" id="request-items" style="padding: 0 5rem;">
+		<section>
+			<div class="section-body">
+			<p> </p>
+				<h1>Request items from our inventory</h1>
 
-				<input type="hidden" name="userId" value="${user.id}"/>
+				<form action="foo" id="request-items" style="padding: 0 5rem;">
 
-				<div class="inline-directive">
-					<h2>Enter the family number:</h2>
+					<input type="hidden" name="userId" value="${user.id}"/>
 
-					<label><input type="text" name="familyNumber"
-						class="family-number-input"></label>
-				</div>
+					<div class="inline-directive">
+						<h2>Enter the family number:</h2>
 
-				<h2 style="margin: -2rem 5rem 3rem 5rem">
-					Request an item by entering a quantity <br>and clicking the
-					Request button for an item:
-				</h2>
+						<label><input type="text" name="familyNumber"
+							class="family-number-input"></label>
+					</div>
 
-				<div style="padding: 0 5rem;">
-					<table id="dataTable" name="dataTable">
-						<thead>
-							<tr>
-								<th>Product Name</th>
-								<th>Description</th>
-								<th>Location</th>
-								<th>Available</th>
-								<th>Qty</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-					</table>
-				</div>
+					<h2 style="margin: -2rem 5rem 3rem 5rem">
+						Request an item by entering a quantity <br>and clicking the
+						Request button for an item:
+					</h2>
 
-			</form>
+					<div style="padding: 0 5rem;">
+						<table id="dataTable" name="dataTable">
+							<thead>
+								<tr>
+									<th>Product Name</th>
+									<th>Description</th>
+									<th>Location</th>
+									<th>Available</th>
+									<th>Qty</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
 
-		</div>
-	</section>
-	<!--
+				</form>
+
+			</div>
+		</section>
+	</div>
+
     <footer>
         Prevent Child Abuse Tennessee
     </footer>
--->
+
 </body>
 </html>

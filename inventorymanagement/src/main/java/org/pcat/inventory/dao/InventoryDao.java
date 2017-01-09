@@ -100,7 +100,7 @@ public class InventoryDao extends BaseDao {
 			updateInventory.setProductName(inventory.getProductName());
 			updateInventory.setProductDesc(inventory.getProductDesc());
 			updateInventory.setTotalInventory(inventory.getTotalInventory());
-			session.update(updateInventory);
+			getSession().update(updateInventory);
 			isUpdated = true;
 			tx.commit();
 		} catch (Exception e) {

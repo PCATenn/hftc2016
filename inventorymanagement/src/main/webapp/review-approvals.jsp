@@ -59,7 +59,6 @@ var url = "listAllInventoriesPending"
 
 </head>
 <body>
-
     <nav>
         <a href="http://www.pcat.org/">
             <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
@@ -105,6 +104,7 @@ var url = "listAllInventoriesPending"
 
         </div>
     </section>
+
 
 </body>
 </html>
