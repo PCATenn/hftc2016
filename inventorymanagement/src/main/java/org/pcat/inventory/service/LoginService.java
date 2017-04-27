@@ -3,6 +3,7 @@ package org.pcat.inventory.service;
 import org.pcat.inventory.dao.LoginDAO;
 import org.pcat.inventory.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.stereotype.Service;
 
 @Service

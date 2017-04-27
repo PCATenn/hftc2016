@@ -33,6 +33,12 @@ public class LoginController {
 	public void setUserLoginManagementService(LoginService loginService) {
 		this.loginService = loginService;
 	}
+//	@RequestMapping(value = "/login")
+	public String login(HttpServletRequest request, Model model) {
+		logger.info("@RequestMapping(value = /login)	"
+				+ "public ModelAndView isUserLoggedIn(HttpServletRequest request, Model model)");
+		return "<h1>Pigs</h1>";
+	}
 
 	/**
 	 * Method to validate user from the Database.
@@ -71,7 +77,6 @@ public class LoginController {
 	 * @return String value using which front end can decide on hiding the
 	 *         navigation.
 	 */
-	@RequestMapping(value = "/logout")
 	public ModelAndView logOut(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /logout)"
 				+ "	public ModelAndView logOut(HttpServletRequest request, Model model)");
