@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,14 +22,18 @@
         </header>
 
         <section>
-            <nav id="nav-bar">
-                <ul>
-                    <li>                    <a href="request.jsp">              request an item     </a>    </li>
-                    <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
-                    <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
-                    <li id="manage-users">  <a href="listAllUsers.jsp">         manage users        </a>    </li>
-                </ul>
-            </nav>
+	     <nav id="nav-bar">
+	        <ul>
+	          <li>                    <a href="request.jsp">              request an item     </a>    </li>
+	        <sec:authorize access="hasRole('SUPERVISOR')">
+	          <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
+	        </sec:authorize>
+	        <sec:authorize access="hasRole('ADMINISTRATOR')">
+	          <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
+	          <li id="manage-users">  <a href="listAllUsers.jsp">         manage users        </a>    </li>
+	        </sec:authorize>
+	        </ul>
+	      </nav>
 
             <script type="text/javascript">
                 // when able to access user,

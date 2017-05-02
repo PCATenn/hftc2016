@@ -49,7 +49,7 @@ public class PcatUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		throw new RuntimeException("Method not implemented");
+		return " ";
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class PcatUserDetails implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return !user.getIsactive();
+		return user.getIsactive();
 	}
 
 	@Override

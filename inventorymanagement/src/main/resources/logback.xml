@@ -5,6 +5,18 @@
 			<Pattern>%d [%thread] %-5level %logger{136} - %msg%n</Pattern>
 		</layout>
 	</appender>
+	<logger name="org.springframework" level="debug" />
+	<logger name="org.springframework.beans.factory.support" level="info" />
+	<logger name="org.springframework.web" level="info" />
+	<logger name="org.springframework.core.env.StandardEnvironment" level="info" />
+	<logger name="org.springframework.beans.factory.xml" level="info" />
+	<logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="info" />
+	<logger name="org.springframework.beans.factory.xml.PluggableSchemaResolver" level="info" />
+	<logger name="org.springframework.core.io.support.PathMatchingResourcePatternResolver" level="info" />
+	<logger name="org.springframework.aop" level="info" />
+	<logger name="org.springframework.jndi" level="info" />
+	<logger name="org.springframework.orm" level="info" />
+	<logger name="DEBUG org.springframework.aop" level="info" />
 	<root level="${root-level:-INFO}">
 		<appender-ref ref="CONSOLE" />
 	</root>

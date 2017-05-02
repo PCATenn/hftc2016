@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +20,6 @@
 <title>Request an item | PCAT inventory</title>
 </head>
 <body>
-
 	<div class="content">
 		<header>
 			<a href="http://www.pcat.org/">
@@ -36,9 +36,13 @@
       <nav id="nav-bar">
         <ul>
           <li>                    <a href="request.jsp">              request an item     </a>    </li>
+        <sec:authorize access="hasRole('SUPERVISOR')">
           <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
+        </sec:authorize>
+        <sec:authorize access="hasRole('ADMINISTRATOR')">
           <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
           <li id="manage-users">  <a href="listAllUsers.jsp">         manage users        </a>    </li>
+        </sec:authorize>
         </ul>
       </nav>
 
