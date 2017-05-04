@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,10 +20,11 @@
                 <a href="http://www.pcat.org/">
                     <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
                 </a>
-
-                <button name="logout" class="button logout-button neutral">
-                    Log out
-                </button>
+				<c:url var="logoutUrl" value="/login?logout"/>
+				<form action="${logoutUrl}"  method="post">
+					<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				</form>
             </header>
 
             <section>
@@ -101,7 +103,7 @@
                             Submit for approval
                         </button>
                     </div>
-
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </div>
             </section>
         </form>

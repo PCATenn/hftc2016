@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.pcat.inventory.model.HomeVisitor;
 import org.pcat.inventory.model.PcatAuthority;
 import org.pcat.inventory.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,9 +17,9 @@ public class PcatUserDetails implements UserDetails {
 	public static final String SUPERVISOR = "Supervisor";
 	public static final String ADMINISTRATOR = "Administrator";
 
-	public static final String ROLE_HOME_VISITOR = "HOME_VISITOR";
-	public static final String ROLE_SUPERVISOR = "SUPERVISOR";
-	public static final String ROLE_ADMINISTRATOR = "ADMINISTRATOR";
+	public static final String ROLE_HOME_VISITOR = "ROLE_HOME_VISITOR";
+	public static final String ROLE_SUPERVISOR = "ROLE_SUPERVISOR";
+	public static final String ROLE_ADMINISTRATOR = "ROLE_ADMINISTRATOR";
 
 	private Collection<PcatAuthority> roles;
 
@@ -75,6 +76,10 @@ public class PcatUserDetails implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return user.getIsactive();
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 }

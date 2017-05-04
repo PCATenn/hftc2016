@@ -1,6 +1,8 @@
 package org.pcat.inventory.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -104,13 +106,15 @@ public class InventoryManagementController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/listAllInventories")
+	@RequestMapping(value = "/listAvailableInventories")
 	@ResponseBody
-	public List<Inventory> listAllInventory(HttpServletRequest request, Model model) {
+	public List<Inventory> listAvailableInventories(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /listAllInventories) "
-				+ " @ResponseBody 	public List<Inventory> listAllInventory(HttpServletRequest request, Model model)");
-		List<Inventory> inventoryList = inventoryManagementService.listAllInventory();
-		return inventoryList;
+				+ " @ResponseBody 	public List<Inventory> listAvailableInventories(HttpServletRequest request, Model model)");
+		
+		return inventoryManagementService.listAllInventory().stream()
+				.filter(inventory -> (inventory.getTotalInventory() - inventory.getReservedInventory() > 0))
+				.collect(Collectors.toList());
 	}
 
 	/**

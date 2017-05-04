@@ -5,22 +5,14 @@
 	<debug />
 	<http pattern="/css/**" security="none" />
 	<http pattern="/img/**" security="none" />
-	
+
 	<http>
 		<intercept-url pattern="/log*" access="isAnonymous()" />
 		<intercept-url pattern="/**" access="hasRole('HOME_VISITOR')" />
-		<form-login login-page="/login.jsp" default-target-url="/request.jsp" />
+		<form-login login-page="/login.jsp"
+			authentication-success-handler-ref="successHandler" />
 	</http>
 	<authentication-manager>
 		<authentication-provider user-service-ref="userDetailsService" />
-		<authentication-provider>
-			<user-service id="userDetailsService">
-				<user name="hvTest.pcat@mailinator.com" password=" "
-					authorities="ROLE_HOME_VISITOR" />
-				<user name="suTest2.pcat@mailinator.com" password=" "
-					authorities="ROLE_HOME_VISITOR, ROLE_SUPERVISOR" />
-			</user-service>
-		</authentication-provider>
 	</authentication-manager>
-
 </b:beans>

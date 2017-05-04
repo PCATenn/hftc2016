@@ -12,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.pcat.inventory.model.RequestItem;
 import org.pcat.inventory.model.Supervisor;
+import org.pcat.inventory.security.model.PcatUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +41,7 @@ public class RequestApprovalController {
 	public ModelAndView approveRequests(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /requestApproval, method = RequestMethod.POST)	"
 				+ "public ModelAndView approveRequests(HttpServletRequest request, Model model)");
-		int userId = Integer.valueOf(request.getParameter("userId"));
+		int userId = getUserId();
 		int familyInventoryRequestId = Integer.valueOf(request.getParameter("familyInventoryId"));
 		logger.debug(String.format("userId %d is approving request id %d", userId, familyInventoryRequestId));
 		Supervisor supervisor = userService.getSupervisor(userId);
@@ -60,7 +62,7 @@ public class RequestApprovalController {
 	public ModelAndView submitRequests(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /submitForRequestApproval, method = RequestMethod.POST)	"
 				+ "public ModelAndView submitRequests(HttpServletRequest request, Model model)");
-		int userId = Integer.valueOf(request.getParameter("userId"));
+		int userId = getUserId();
 		String familyId = request.getParameter("familyId");
 		int inventoryId = Integer.valueOf(request.getParameter("inventoryId"));
 		int quantity = 1;
@@ -76,5 +78,13 @@ public class RequestApprovalController {
 		logger.debug(String.format("requestItems(%s, %s, %s)", familyId, requestItems.toString(), homeVisitor.getLastName()));
 		requestFamilyItemsService.requestItems(familyId, requestItems, homeVisitor);
 		return new ModelAndView("confirm-request.jsp");
+	}
+
+	private int getUserId() {
+		PcatUserDetails userDetails =
+				 (PcatUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		int userId = Integer.valueOf(userDetails.getUser().getId());
+		return userId;
 	}
 }

@@ -1,4 +1,4 @@
-var url = "listAllInventories"
+var url = "listAvailableInventories"
 $(document).ready(function(){
 	var request_items_form = $("#request-items");
 	jQuery.validator.setDefaults({
