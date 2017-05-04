@@ -56,7 +56,7 @@
 						<h2>Enter the family number:</h2>
 
 						<label><input type="text" name="familyNumber"
-							class="input-field"></label>
+							class="input-field">&nbspi.e.&nbsp(XXXX-0000)</label>
 					</div>
 
 					<h2 style="margin: -2rem 5rem 3rem 5rem">
