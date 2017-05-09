@@ -21,7 +21,7 @@ public class UserDao extends BaseDao {
 
 	public List<User> getBySupervisorEmail(final String supervisorEmail) {
 		final String hql = "select user from User user where user.supervisorEmail = :supervisorEmail";
-		return (List<User>) super.getSession().createQuery(hql).setString("emailAddress", supervisorEmail);
+		return (List<User>) super.getSession().createQuery(hql).setString("supervisorEmail", supervisorEmail).list();
 	}
 
 }

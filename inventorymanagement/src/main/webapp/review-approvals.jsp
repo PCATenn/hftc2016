@@ -90,21 +90,6 @@ var url = "listAllInventoriesPending"
 	        </ul>
 	      </nav>
 
-            <script type="text/javascript">
-                // when able to access user,
-                //   1. replace the condition (currently a string) in each if statement below with the logic it describes
-                //      (currently the conditions both evaluate to true since any string except "" evaluates to true)
-                //   2. uncomment the body of each if statement
-                //   3. feel free to delete this comment block
-
-                if ('user.role === homeVisitor') {
-                    // document.getElementById("nav-bar").classList.add("hidden");
-                } else if ('user.role === supervisor') {
-                    // document.getElementById("manage-items").classList.add("hidden");
-                    // document.getElementById("manage-users").classList.add("hidden");
-                }
-            </script>
-
             <div class="section-body">
                 <h1>
                     Review pending approvals

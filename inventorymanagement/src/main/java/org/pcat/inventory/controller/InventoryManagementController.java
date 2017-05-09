@@ -1,18 +1,22 @@
 package org.pcat.inventory.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.pcat.inventory.model.FamilyInventory;
 import org.pcat.inventory.model.FamilyInventoryDisplayRequest;
+import org.pcat.inventory.model.HomeVisitor;
 import org.pcat.inventory.model.Inventory;
+import org.pcat.inventory.model.Supervisor;
+import org.pcat.inventory.security.model.PcatUserDetails;
 import org.pcat.inventory.service.InventoryManagementService;
+import org.pcat.inventory.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +31,9 @@ public class InventoryManagementController {
 
 	@Autowired
 	private InventoryManagementService inventoryManagementService;
+
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * @return the inventoryManagementService
@@ -111,7 +118,7 @@ public class InventoryManagementController {
 	public List<Inventory> listAvailableInventories(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /listAllInventories) "
 				+ " @ResponseBody 	public List<Inventory> listAvailableInventories(HttpServletRequest request, Model model)");
-		
+
 		return inventoryManagementService.listAllInventory().stream()
 				.filter(inventory -> (inventory.getTotalInventory() - inventory.getReservedInventory() > 0))
 				.collect(Collectors.toList());
@@ -149,12 +156,23 @@ public class InventoryManagementController {
 	public List<FamilyInventoryDisplayRequest> listAllInventoryPending(HttpServletRequest request, Model model) {
 		logger.info("	@RequestMapping(value = /listAllInventoriesPending)	@ResponseBody	"
 				+ "public List<FamilyInventoryDisplayRequest> listAllInventoryPending(HttpServletRequest request, Model model) ");
+		if(request.isUserInRole(PcatUserDetails.ROLE_ADMINISTRATOR)) {
+			return inventoryManagementService.listAllFamilyInventoryDataRequest();
+		}
+		PcatUserDetails pcatUserDetails = (PcatUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Supervisor supervisor =  new Supervisor(pcatUserDetails.getUser());
+		Map<Integer, HomeVisitor> managedHomeVisitors = 
+				userService.getHomeVisitorsFromSupervisorEmail(
+						supervisor.getEmail()).stream().collect(Collectors.toMap(hv -> hv.getId(), hv -> hv));
 		List<FamilyInventoryDisplayRequest> inventoryList = inventoryManagementService
-				.listAllFamilyInventoryDataRequest();
+				.listAllFamilyInventoryDataRequest().stream().filter(inventory -> doesTheUserManageHomeVisitor(inventory, managedHomeVisitors)).collect(Collectors.toList());
 		if (logger.isDebugEnabled()) {
 			inventoryList
 					.forEach(famInv -> logger.debug(String.format("item sent to requestor %s", famInv.toString())));
 		}
 		return inventoryList;
+	}
+	private boolean doesTheUserManageHomeVisitor(FamilyInventoryDisplayRequest inventory, Map<Integer, HomeVisitor> homeVisitors) {
+		return homeVisitors.containsKey(inventory.getRequestorId());
 	}
 }

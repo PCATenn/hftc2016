@@ -25,9 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class RequestApprovalController {
 	private static final Logger logger = LoggerFactory.getLogger(RequestApprovalController.class);
 	@Autowired
-	private RequestFamilyItemsService requestFamilyItemsService;
+	private  RequestFamilyItemsService requestFamilyItemsService;
 	@Autowired
-	private UserService userService;
+	private  UserService userService;
 
 	/**
 	 * This method approves requests and updates the database for approved

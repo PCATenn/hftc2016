@@ -73,7 +73,8 @@ function submitRequest(id)  {
     for (var key in payload) {
         $('<input>').attr('type','hidden').attr('name',key).attr('value',payload[key]).appendTo($form);
     }
-    $(document.body).append($form)
+    $("#_csrf_name").appendTo($form);
+    $(document.body).append($form);
     $form.submit();
 }
 
