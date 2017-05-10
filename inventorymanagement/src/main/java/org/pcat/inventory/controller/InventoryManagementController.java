@@ -77,7 +77,7 @@ public class InventoryManagementController {
 	 * @return
 	 */
 	@RequestMapping(value = "/updateInventory", method = RequestMethod.POST)
-	public ModelAndView updateUser(HttpServletRequest request, Model model) {
+	public ModelAndView updateInventory(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /updateInventory, method = RequestMethod.POST) "
 				+ "	public ModelAndView updateUser(HttpServletRequest request, Model model");
 		Inventory inventory = new Inventory();
@@ -97,7 +97,7 @@ public class InventoryManagementController {
 	 * @return
 	 */
 	@RequestMapping(value = "/deleteInventory", method = RequestMethod.POST)
-	public ModelAndView deleteUser(HttpServletRequest request, Model model) {
+	public ModelAndView deletInventory(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /deleteInventory, method = RequestMethod.POST) "
 				+ " public ModelAndView deleteUser(HttpServletRequest request, Model model)");
 		Inventory inventory = new Inventory();
@@ -124,6 +124,15 @@ public class InventoryManagementController {
 				.collect(Collectors.toList());
 	}
 
+	@RequestMapping(value = "/listAllItems")
+	@ResponseBody
+	public List<Inventory> listAllItems(HttpServletRequest request, Model model) {
+		logger.info("@RequestMapping(value = /listAllItems) "
+				+ " @ResponseBody 	public List<Inventory> listAllItems(HttpServletRequest request, Model model)");
+
+		return inventoryManagementService.listAllInventory();
+	}
+
 	/**
 	 * Method to delete inventory Details into Database.
 	 *
@@ -144,6 +153,16 @@ public class InventoryManagementController {
 		return new ModelAndView("complete-request.jsp", "inventory", inventory);
 	}
 
+	@RequestMapping(value = "/getInventoryItem", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getInventoryItem(HttpServletRequest request, Model model) {
+		logger.info("@RequestMapping(value = /getInventoryItem, method = RequestMethod.POST)	"
+				+ "@ResponseBody	public ModelAndView gotoComplete(HttpServletRequest request, Model model)");
+		Integer id = new Integer(request.getParameter("id"));
+		Inventory inventory = inventoryManagementService.getInventory(id);
+		return new ModelAndView("update-item.jsp", "inventory", inventory);
+	}
+
 	/**
 	 * Method to delete inventory Details into Database.
 	 *
@@ -151,28 +170,33 @@ public class InventoryManagementController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/listAllInventoriesPending")
+	@RequestMapping(value = "/listPendingRequests")
 	@ResponseBody
-	public List<FamilyInventoryDisplayRequest> listAllInventoryPending(HttpServletRequest request, Model model) {
-		logger.info("	@RequestMapping(value = /listAllInventoriesPending)	@ResponseBody	"
+	public List<FamilyInventoryDisplayRequest> listPendingRequests(HttpServletRequest request, Model model) {
+		logger.info("	@RequestMapping(value = /listPendingRequests)	@ResponseBody	"
 				+ "public List<FamilyInventoryDisplayRequest> listAllInventoryPending(HttpServletRequest request, Model model) ");
-		if(request.isUserInRole(PcatUserDetails.ROLE_ADMINISTRATOR)) {
+		if (request.isUserInRole(PcatUserDetails.ROLE_ADMINISTRATOR)) {
 			return inventoryManagementService.listAllFamilyInventoryDataRequest();
 		}
-		PcatUserDetails pcatUserDetails = (PcatUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Supervisor supervisor =  new Supervisor(pcatUserDetails.getUser());
-		Map<Integer, HomeVisitor> managedHomeVisitors = 
-				userService.getHomeVisitorsFromSupervisorEmail(
-						supervisor.getEmail()).stream().collect(Collectors.toMap(hv -> hv.getId(), hv -> hv));
+		PcatUserDetails pcatUserDetails = (PcatUserDetails) SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
+		Supervisor supervisor = new Supervisor(pcatUserDetails.getUser());
+		Map<Integer, HomeVisitor> managedHomeVisitors = userService
+				.getHomeVisitorsFromSupervisorEmail(supervisor.getEmail()).stream()
+				.collect(Collectors.toMap(hv -> hv.getId(), hv -> hv));
 		List<FamilyInventoryDisplayRequest> inventoryList = inventoryManagementService
-				.listAllFamilyInventoryDataRequest().stream().filter(inventory -> doesTheUserManageHomeVisitor(inventory, managedHomeVisitors)).collect(Collectors.toList());
+				.listAllFamilyInventoryDataRequest().stream()
+				.filter(inventory -> doesTheUserManageHomeVisitor(inventory, managedHomeVisitors))
+				.collect(Collectors.toList());
 		if (logger.isDebugEnabled()) {
 			inventoryList
 					.forEach(famInv -> logger.debug(String.format("item sent to requestor %s", famInv.toString())));
 		}
 		return inventoryList;
 	}
-	private boolean doesTheUserManageHomeVisitor(FamilyInventoryDisplayRequest inventory, Map<Integer, HomeVisitor> homeVisitors) {
+
+	private boolean doesTheUserManageHomeVisitor(FamilyInventoryDisplayRequest inventory,
+			Map<Integer, HomeVisitor> homeVisitors) {
 		return homeVisitors.containsKey(inventory.getRequestorId());
 	}
 }

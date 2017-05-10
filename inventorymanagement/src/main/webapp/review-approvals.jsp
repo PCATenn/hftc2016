@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 
-var url = "listAllInventoriesPending"
+var url = "listPendingRequests"
 	$(document).ready(function(){
 	    $('#dataTable').DataTable( {
 	        "ajax": {

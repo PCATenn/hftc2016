@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
     <title>Update an item | PCAT Inventory Management</title>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
 <body>
 
@@ -37,21 +38,6 @@
 		        </ul>
 		      </nav>
 
-            <script type="text/javascript">
-                // when able to access user,
-                //   1. replace the condition (currently a string) in each if statement below with the logic it describes
-                //      (currently the conditions both evaluate to true since any string except "" evaluates to true)
-                //   2. uncomment the body of each if statement
-                //   3. feel free to delete this comment block
-
-                if ('user.role === homeVisitor') {
-                    // document.getElementById("nav-bar").classList.add("hidden");
-                } else if ('user.role === supervisor') {
-                    // document.getElementById("manage-items").classList.add("hidden");
-                    // document.getElementById("manage-users").classList.add("hidden");
-                }
-            </script>
-
             <div class="section-body">
                 <h1>
                     Update an item
@@ -62,40 +48,48 @@
                         <label for="updateProdName">
                             Product name:
                         </label>
-                        <input type="text" id="updateProdName" name="updateProdName" class="input-field" style="width: 20rem;" />
+                        <input type="text" id="productName" name="productName" class="input-field" style="width: 20rem;" value="${inventory.productName }"/>
                     </div>
+
+	private String location; <br/> ${inventory.location}
 
                     <div class="add-form">
                         <label for="updateProdDescription">
                             Product Description:
                         </label>
-                        <input type="text" id="updateProdDescription" name="updateProdDescription" class="input-field" style="width: 20rem;" />
+                        <input type="text" id="productDesc" name="productDesc" class="input-field" style="width: 20rem;" value="${inventory.productDesc}"/>
                     </div>
 
                     <div class="add-form">
                         <label for="updateProdQuantity">
                             Quantity:
                         </label>
-                        <input type="number" id="updateProdQuantity" name="updateProdQuantity" class="input-field" style="width: 5rem;" />
+                        <input type="number" id="totalInventory" name="totalInventory" class="input-field" style="width: 5rem;" value="${inventory.totalInventory}"/>
                     </div>
-
+                   <div class="add-form">
+                        <label for="updateProdQuantity">
+                            Reserved Quantity:
+                        </label>
+                        &nbsp ${reservedInventory}
+                        <input type="number" id="reservedInventory" name="reservedInventory" class="input-field" style="width: 5rem;" value="${inventory.reservedInventory}"/>
+                    </div>
                     <div class="add-form">
                         <label for="updateProdLocation">
                             Location:
                         </label>
-                        <select id="updateProdLocation" name="updateProdLocation" style="min-width: 16rem;" >
-                            <option value="nashville" selected>Nashville</option>
-                            <option value="chattanooga">Chattanooga</option>
-                            <option value="oak-ridge">Oak Ridge</option>
+                        <select id="location" name="location" style="min-width: 16rem;"  >
+                            <option>Nashville</option>
+                            <option>Chattanooga</option>
+                            <option>Oak Ridge</option>
                         </select>
-                    </div>
+                   </div>
 
                     <div style="margin-top: 3rem; display: flex; justify-content: center;">
                         <button type="reset" name="cancel-request" class="button medium-button neutral">
                             Cancel
                         </button>
 
-                        <button type="submit" name="delete-user" class="button medium-button danger">
+                        <button type="submit" name="delete-item" class="button medium-button danger">
                             Delete this item
                         </button>
 
@@ -114,4 +108,12 @@
     </footer>
 
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		console.log("attempting to update the select list with ${inventory.location}");
+		$('#location').val('${inventory.location}');
+	});
+
+</script>
+
 </html>

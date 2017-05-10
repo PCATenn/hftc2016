@@ -91,4 +91,8 @@ public class InventoryManagementService {
 		homeVisitors.forEach(hv -> homeVisitorIds.add(hv.getId()));
 		return familyInventoryDisplayRequestDao.findAllForIds(homeVisitorIds);
 	}
+
+	public Inventory getInventory(Integer id) {
+		return inventoryDao.getById(id);
+	}
 }

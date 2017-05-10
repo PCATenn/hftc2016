@@ -25,6 +25,10 @@ public class UserService {
 		return new Supervisor(user);
 	}
 
+	public void delete(PcatPerson user) {
+		this.userDao.delete(user);
+	}
+
 	public HomeVisitor getHomeVisitor(int userId) {
 		PcatPerson user = userDao.getById(userId);
 		return buildHomeVisitor(user);
@@ -47,8 +51,20 @@ public class UserService {
 		return buildSupervisor(user);
 	}
 
+	public List<User> listAllUsers() {
+		return this.userDao.findAll();
+	}
+
+	public void save(User user) {
+		this.userDao.saveOrUpdate(user);
+	}
+
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	public User getUser(Integer id) {
+		return this.userDao.getById(id);
 	}
 
 }

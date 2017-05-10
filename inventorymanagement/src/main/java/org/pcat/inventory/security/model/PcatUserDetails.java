@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class PcatUserDetails implements UserDetails {
 
 	private static final long serialVersionUID = 6719074966324925290L;
-	private User user;
+	private static final String ALL_PASSWORDS_ARE_A_SPACE = " ";
 	public static final String HOME_VISITOR = "Home Visitor";
 	public static final String SUPERVISOR = "Supervisor";
 	public static final String ADMINISTRATOR = "Administrator";
@@ -20,6 +20,8 @@ public class PcatUserDetails implements UserDetails {
 	public static final String ROLE_HOME_VISITOR = "ROLE_HOME_VISITOR";
 	public static final String ROLE_SUPERVISOR = "ROLE_SUPERVISOR";
 	public static final String ROLE_ADMINISTRATOR = "ROLE_ADMINISTRATOR";
+
+	private User user;
 
 	private Collection<PcatAuthority> roles;
 
@@ -50,7 +52,7 @@ public class PcatUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return " ";
+		return ALL_PASSWORDS_ARE_A_SPACE;
 	}
 
 	@Override

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +15,64 @@
 	href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
 <script
 	src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+</head>
+<body>
+
+	<div class="content">
+			<header>
+				<a href="http://www.pcat.org/">
+					<img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
+				</a>
+				<c:url var="logoutUrl" value="/login?logout"/>
+				<form action="${logoutUrl}"  method="post">
+					<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				</form>
+			</header>
+
+			<section>
+		     <nav id="nav-bar">
+		        <ul>
+		          <li>                    <a href="request.jsp">              request an item     </a>    </li>
+		        <sec:authorize access="hasRole('SUPERVISOR')">
+		          <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
+		        </sec:authorize>
+		        <sec:authorize access="hasRole('ADMINISTRATOR')">
+		          <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
+		          <li id="manage-users">  <a href="listAllUsers.jsp">         manage users        </a>    </li>
+		        </sec:authorize>
+		        </ul>
+		      </nav>
+
+			<div class="section-body">
+				<h1>Manage users</h1>
+
+
+				<table id="dataTable" class="dummy-inventory">
+					<thead>
+						<tr>
+							<th>User Id</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
+							<th>Role</th>
+							<th>Supervisor</th>
+							<th>Supervisor Email</th>
+							<th></th>
+						</tr>
+					</thead>
+				</table>
+
+				<button name="add-user" class="button medium-button affirmative"
+					onclick="dothis('add')">Add a user</button>
+			</div>
+		</section>
+	</div>
+
+	<footer> Prevent Child Abuse Tennessee </footer>
+
+</body>
 <script type="text/javascript">
 	var url = "listAllUsers";
 
@@ -30,16 +89,29 @@
 	            { "data": "email" },
 	            { "data": "role" },
 	            { "data": "supervisor" },
-	            { "data": "supervisoremail" },
+	            { "data": "supervisorEmail" },
 	            { "render": function(data, type, row, meta) {
-
-	                  return '<input type="hidden" name="userId"><a href="gotoComplete?id=' + row.id + '">Update/Delete</a>';
+	            	return '<input type="hidden" name="userId"><a class="update_delete" onclick="submitRequest(' + row.id + ');">Update/Delete</a>';
 	              }
 	            }
 
 	        ]
 	    } );
 	});
+	function submitRequest(id)  {
+	    var payload = {
+	        "id": id
+	    };
+	    var $form = $('<form method="GET" action="getUser"></form>');
+	    for (var key in payload) {
+	        $('<input>').attr('type','hidden').attr('name',key).attr('value',payload[key]).appendTo($form);
+	    }
+	    var csrf = $("#_csrf_name");
+	    console.log("csrf:  " + JSON.stringify(csrf));
+	    csrf.appendTo($form);
+	    $(document.body).append($form);
+	    $form.submit();
+	}
 
 	function dothis(parameter) {
 	 if(parameter == 'add') {
@@ -49,73 +121,4 @@
 	}
 
 </script>
-</head>
-<body>
-
-	<div class="content">
-		<form>
-				<input type="hidden" name="id" id="id" value="3"/>
-				<input type="hidden" name="productName" id="productName" value="Car Seat"/>
-				<input type="hidden" name="productDesc" id="productDesc" value="Infant"/>
-				<input type="hidden" name="location" id="location" value="Nashville"/>
-				<input type="hidden" name="totalInventory" id="totalInventory" value="3"/>
-				<input type="hidden" name="userId" id="userId" value="${user.id}"/>
-			<header>
-				<a href="http://www.pcat.org/">
-					<img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
-				</a>
-				<c:url var="logoutUrl" value="/login?logout"/>
-				<form action="${logoutUrl}"  method="post">
-					<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				</form>
-			</header>
-
-			<section>
-			     <nav id="nav-bar">
-			        <ul>
-			          <li>                    <a href="request.jsp">              request an item     </a>    </li>
-			        <sec:authorize access="hasRole('SUPERVISOR')">
-			          <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
-			        </sec:authorize>
-			        <sec:authorize access="hasRole('ADMINISTRATOR')">
-			          <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
-			          <li id="manage-users">  <a href="listAllUsers.jsp">         manage users        </a>    </li>
-			        </sec:authorize>
-			        </ul>
-			      </nav>
-
-				<div class="section-body">
-					<h1>Manage users</h1>
-
-
-					<table id="dataTable" class="dummy-inventory">
-						<thead>
-							<tr>
-								<th >User Id</th>
-								<th >First Name</th>
-								<th >Last Name</th>
-								<th >Email</th>
-								<th >Role</th>
-								<th >Supervisor</th>
-								<th >Supervisor Email</th>
-								<th ></th>
-							</tr>
-						</thead>
-					</table>
-
-          <button name="add-user" class="button medium-button affirmative" onclick="dothis('add')">
-              Add a user
-          </button>
-				</div>
-			</section>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		</form>
-	</div>
-
-	<footer>
-		Prevent Child Abuse Tennessee
-	</footer>
-
-</body>
 </html>
