@@ -11,13 +11,15 @@
     <script src="http://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
 <body>
-
+<c:url var="logoutUrl" value="/login?logout"/>
+<c:url var="cancelUrl" value="/listAllInventories.jsp"/>
+<c:url var="updateUrl" value="/updateInventory"/>
+<c:url var="confirmDeleteUrl" value="/confirmInventoryDelete"/>
     <div class="content">
         <header>
             <a href="http://www.pcat.org/">
                 <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
             </a>
-			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
 				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -83,23 +85,22 @@
                             <option>Oak Ridge</option>
                         </select>
                    </div>
-
-                    <div style="margin-top: 3rem; display: flex; justify-content: center;">
-                        <button type="reset" name="cancel-request" class="button medium-button neutral">
+                                      <div style="margin-top: 3rem; display: flex; justify-content: center;">
+                        <button type="submit" name="cancel-request" class="button medium-button neutral" formaction="${cancelUrl}">
                             Cancel
                         </button>
 
-                        <button type="submit" name="delete-item" class="button medium-button danger">
+                        <button type="submit" name="delete-item" class="button medium-button danger" formaction="${confirmDeleteUrl}">
                             Delete this item
                         </button>
 
-                        <button type="submit" name="submit-request" class="button medium-button affirmative">
+                        <button type="submit" name="submit-request" class="button medium-button affirmative" formaction="${updateUrl}" formmethod="POST">
                             Update this item
                         </button>
                     </div>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
-            </div>
+          </div>
         </section>
     </div>
 
@@ -109,6 +110,7 @@
 
 </body>
 <script type="text/javascript">
+	var _csrf = ${_csrf.token};
 	$(document).ready(function() {
 		console.log("attempting to update the select list with ${inventory.location}");
 		$('#location').val('${inventory.location}');
