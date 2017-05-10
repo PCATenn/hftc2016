@@ -21,17 +21,11 @@
 
             <div class="section-body">
                 <h1>
-                    Old Log in
+                    Good-bye.  <br/> You have been logged out.
                 </h1>
 
-                <div class="login-card">
-                    <form class="login-form" action="loginPage">
-                        <input type="email" class="login-input" value="" spellcheck="false"
-                            name="email" id="email" placeholder="Enter your email address"
-                            autofocus>
-                        <button name="submit" class="button big-button affirmative">
-                            Submit</button>
-                    </form>
+                <div class="logout-card">
+                   
 
                 </div>
 

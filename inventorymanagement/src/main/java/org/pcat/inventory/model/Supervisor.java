@@ -14,14 +14,14 @@ public class Supervisor implements PcatPerson, Serializable {
 		super();
 		pcatPerson = new User();
 	}
-	public Supervisor(String firstName, String lastName, String email, String supervisor, String supervisorEmail) {
-		super();
-		this.pcatPerson = new User(null, firstName, lastName, email, "Supervisor", supervisor, supervisorEmail, true);
-	}
 
 	public Supervisor(PcatPerson pcatPerson) {
-		super();
+		this();
 		this.pcatPerson = pcatPerson;
+	}
+
+	public Supervisor(String firstName, String lastName, String email, String supervisor, String supervisorEmail) {
+		this(new User(null, firstName, lastName, email, "Supervisor", supervisor, supervisorEmail, true));
 	}
 
 	public String getEmail() {

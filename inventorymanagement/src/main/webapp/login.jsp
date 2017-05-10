@@ -21,16 +21,18 @@
 
             <div class="section-body">
                 <h1>
-                    Old Log in
+                    Log in
                 </h1>
 
                 <div class="login-card">
-                    <form class="login-form" action="loginPage">
+                    <form class="login-form" action="/inventorymanagement/login" method="post">
                         <input type="email" class="login-input" value="" spellcheck="false"
-                            name="email" id="email" placeholder="Enter your email address"
+                            name="username" id="username" placeholder="Enter your email address"
                             autofocus>
+                            <input type="hidden" name="password" id="password" value=" "/>
                         <button name="submit" class="button big-button affirmative">
                             Submit</button>
+                   		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
 
                 </div>

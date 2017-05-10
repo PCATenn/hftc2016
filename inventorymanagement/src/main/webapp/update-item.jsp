@@ -1,28 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
-    <title>Add an item | PCAT Inventory Management</title>
+    <title>Update an item | PCAT Inventory Management</title>
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
 <body>
 
     <div class="content">
         <header>
-            <a href="http://www.pcat.org/inventorymanagement">
+            <a href="http://www.pcat.org/">
                 <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
             </a>
-            <span><h2 style="margin: 0rem 5rem 3rem 5rem">${System.getenv("PCAT_ENVIRONTMENT_DISPLAY_TEXT")}</h2></span>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
 				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
-        </header>
+       </header>
 
         <section>
 		     <nav id="nav-bar">
@@ -38,66 +38,63 @@
 		        </ul>
 		      </nav>
 
-            <script type="text/javascript">
-                // when able to access user,
-                //   1. replace the condition (currently a string) in each if statement below with the logic it describes
-                //      (currently the conditions both evaluate to true since any string except "" evaluates to true)
-                //   2. uncomment the body of each if statement
-                //   3. feel free to delete this comment block
-
-                if ('user.role === homeVisitor') {
-                    // document.getElementById("nav-bar").classList.add("hidden");
-                } else if ('user.role === supervisor') {
-                    // document.getElementById("manage-items").classList.add("hidden");
-                    // document.getElementById("manage-users").classList.add("hidden");
-                }
-            </script>
-
             <div class="section-body">
                 <h1>
-                    Add an inventory item
+                    Update an item
                 </h1>
 
                 <form style="margin: -3rem 5rem 3rem 5rem;">
                     <div class="add-form">
-                        <label for="prodName">
+                        <label for="updateProdName">
                             Product name:
                         </label>
-                        <input type="text" id="prodName" name="prodName" class="input-field" style="width: 20rem;" />
+                        <input type="text" id="productName" name="productName" class="input-field" style="width: 20rem;" value="${inventory.productName }"/>
                     </div>
 
+	private String location; <br/> ${inventory.location}
+
                     <div class="add-form">
-                        <label for="prodDescription">
+                        <label for="updateProdDescription">
                             Product Description:
                         </label>
-                        <input type="text" id="prodDescription" name="prodDescription" class="input-field" style="width: 20rem;" />
+                        <input type="text" id="productDesc" name="productDesc" class="input-field" style="width: 20rem;" value="${inventory.productDesc}"/>
                     </div>
 
                     <div class="add-form">
-                        <label for="prodQuantity">
+                        <label for="updateProdQuantity">
                             Quantity:
                         </label>
-                        <input type="number" id="prodQuantity" name="prodQuantity" class="input-field" style="width: 5rem;" />
+                        <input type="number" id="totalInventory" name="totalInventory" class="input-field" style="width: 5rem;" value="${inventory.totalInventory}"/>
                     </div>
-
+                   <div class="add-form">
+                        <label for="updateProdQuantity">
+                            Reserved Quantity:
+                        </label>
+                        &nbsp ${reservedInventory}
+                        <input type="number" id="reservedInventory" name="reservedInventory" class="input-field" style="width: 5rem;" value="${inventory.reservedInventory}"/>
+                    </div>
                     <div class="add-form">
-                        <label for="prodLocation">
+                        <label for="updateProdLocation">
                             Location:
                         </label>
-                        <select id="prodLocation" name="prodLocation" style="min-width: 16rem;" >
-                            <option value="nashville" selected>Nashville</option>
-                            <option value="chattanooga">Chattanooga</option>
-                            <option value="oak-ridge">Oak Ridge</option>
+                        <select id="location" name="location" style="min-width: 16rem;"  >
+                            <option>Nashville</option>
+                            <option>Chattanooga</option>
+                            <option>Oak Ridge</option>
                         </select>
-                    </div>
+                   </div>
 
                     <div style="margin-top: 3rem; display: flex; justify-content: center;">
                         <button type="reset" name="cancel-request" class="button medium-button neutral">
                             Cancel
                         </button>
 
+                        <button type="submit" name="delete-item" class="button medium-button danger">
+                            Delete this item
+                        </button>
+
                         <button type="submit" name="submit-request" class="button medium-button affirmative">
-                            Add this item
+                            Update this item
                         </button>
                     </div>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -111,4 +108,12 @@
     </footer>
 
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		console.log("attempting to update the select list with ${inventory.location}");
+		$('#location').val('${inventory.location}');
+	});
+
+</script>
+
 </html>

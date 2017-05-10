@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.pcat.inventory.model.PcatPerson;
 import org.pcat.inventory.model.User;
-import org.pcat.inventory.service.UserManagementService;
+import org.pcat.inventory.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.ui.Model;
@@ -20,65 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserManagementController {
 
 	@Autowired
-	private UserManagementService userManagementService;
+	private UserService userService;
 
 	@Autowired
 	private MailSender mailSender;
 
-	/**
-	 * @return the userManagementService
-	 */
-	public UserManagementService getUserManagementService() {
-		return userManagementService;
-	}
-
-	/**
-	 * @param userManagementService
-	 *            the userManagementService to set
-	 */
-	public void setUserManagementService(UserManagementService userManagementService) {
-		this.userManagementService = userManagementService;
-	}
-
-	/**
-	 * @return the mailSender
-	 */
-	public MailSender getMailSender() {
-		return mailSender;
-	}
-
-	/**
-	 * @param mailSender
-	 *            the mailSender to set
-	 */
-	public void setMailSender(MailSender mailSender) {
-		this.mailSender = mailSender;
-	}
-
-	/**
-	 * Method to save User Details into Database.
-	 * 
-	 * @param request
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/addUserPage")
-	public ModelAndView addUserPage(HttpServletRequest request, Model model) {
-		return new ModelAndView("add-user.jsp");
-	}
-	
-	/**
-	 * Method to save User Details into Database.
-	 * 
-	 * @param request
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/updateUserPage", method = RequestMethod.POST)
-	public ModelAndView updateUserPage(HttpServletRequest request, Model model) {
-		return new ModelAndView("update-user.jsp");
-	}
-	
 	/**
 	 * Method to save User Details into Database.
 	 * 
@@ -95,15 +41,84 @@ public class UserManagementController {
 		user.setSupervisorEmail(request.getParameter("supervisorEmail"));
 		user.setEmail(request.getParameter("email"));
 		user.setRole(request.getParameter("role"));
-		userManagementService.saveUser(user);
-		// SimpleMailMessage mailMessage = new SimpleMailMessage();
-		// mailMessage.setFrom("admin@pcat.org");
-		// mailMessage.setTo(user.getSupervisoremail());
-		// mailMessage.setSubject(
-		// "User + " + user.getFirstname() + " " + user.getLastname() + " added
-		// in Inventory System!");
-		// mailSender.send(mailMessage);
+		userService.save(user);
 		return new ModelAndView("success");
+	}
+
+	/**
+	 * Method to save User Details into Database.
+	 * 
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/addUserPage")
+	public ModelAndView addUserPage(HttpServletRequest request, Model model) {
+		return new ModelAndView("add-user.jsp");
+	}
+
+	/**
+	 * Method to delete User Details into Database.
+	 * 
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+	public ModelAndView deleteUser(HttpServletRequest request, Model model) {
+		PcatPerson user = new User();
+		user.setId(new Integer(request.getParameter("userId")));
+		userService.delete(user);
+		return new ModelAndView("success");
+	}
+
+	/**
+	 * @return the mailSender
+	 */
+	public MailSender getMailSender() {
+		return mailSender;
+	}
+
+	/**
+	 * @return the userService
+	 */
+	public UserService getuserService() {
+		return userService;
+	}
+	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getUser(HttpServletRequest request, Model model) {
+		Integer id = new Integer(request.getParameter("id"));
+		User user = userService.getUser(id);
+		return new ModelAndView("update-user.jsp", "user", user);
+	}	
+	/**
+	 * Method to delete User Details into Database.
+	 * 
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/listAllUsers", method = RequestMethod.GET)
+	@ResponseBody
+	public List<User> listAllUsers(HttpServletRequest request, Model model) {
+		return userService.listAllUsers();
+	}
+	
+	/**
+	 * @param mailSender
+	 *            the mailSender to set
+	 */
+	public void setMailSender(MailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
+	/**
+	 * @param userService
+	 *            the userService to set
+	 */
+	public void setuserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	/**
@@ -123,48 +138,19 @@ public class UserManagementController {
 		user.setSupervisorEmail(request.getParameter("supervisorEmail"));
 		user.setEmail(request.getParameter("email"));
 		user.setRole(request.getParameter("role"));
-		userManagementService.updateUser(user);
-		// SimpleMailMessage mailMessage = new SimpleMailMessage();
-		// mailMessage.setFrom("admin@pcat.org");
-		// mailMessage.setTo(user.getSupervisoremail());
-		// mailMessage.setSubject(
-		// "User + " + user.getFirstname() + " " + user.getLastname() + "
-		// updated in Inventory System!");
-		// mailSender.send(mailMessage);
+		userService.save(user);
 		return new ModelAndView("success");
 	}
 
 	/**
-	 * Method to delete User Details into Database.
+	 * Method to save User Details into Database.
 	 * 
 	 * @param request
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-	public ModelAndView deleteUser(HttpServletRequest request, Model model) {
-		PcatPerson user = new User();
-		user.setId(new Integer(request.getParameter("userId")));
-		userManagementService.deleteUser(user);
-		// SimpleMailMessage mailMessage = new SimpleMailMessage();
-		// mailMessage.setFrom("admin@pcat.org");
-		// mailMessage.setTo(user.getSupervisoremail());
-		// mailMessage.setSubject(
-		// "User + " + user.getId() + " deleted to the Inventory System!");
-		// mailSender.send(mailMessage);
-		return new ModelAndView("success");
-	}
-
-	/**
-	 * Method to delete User Details into Database.
-	 * 
-	 * @param request
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/listAllUsers", method = RequestMethod.GET)
-	@ResponseBody
-	public List<User> listAllUsers(HttpServletRequest request, Model model) {
-		return userManagementService.listAllUsers();
+	@RequestMapping(value = "/updateUserPage", method = RequestMethod.POST)
+	public ModelAndView updateUserPage(HttpServletRequest request, Model model) {
+		return new ModelAndView("update-user.jsp");
 	}
 }
