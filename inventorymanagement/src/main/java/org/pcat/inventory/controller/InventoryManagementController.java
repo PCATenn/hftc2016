@@ -69,24 +69,19 @@ public class InventoryManagementController {
 		return new ModelAndView("success");
 	}
 
-	/**
-	 * Method to update inventory Details into Database.
-	 *
-	 * @param request
-	 * @param model
-	 * @return
-	 */
 	@RequestMapping(value = "/updateInventory", method = RequestMethod.POST)
 	public ModelAndView updateInventory(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /updateInventory, method = RequestMethod.POST) "
 				+ "	public ModelAndView updateUser(HttpServletRequest request, Model model");
 		Inventory inventory = new Inventory();
-		inventory.setId(new Integer(request.getParameter("inventoryId")));
+		inventory.setId(new Integer(request.getParameter("id")));
 		inventory.setProductName(request.getParameter("productName"));
 		inventory.setProductDesc(request.getParameter("productDesc"));
+		inventory.setReservedInventory(new Integer(request.getParameter("reservedInventory")));
 		inventory.setTotalInventory(new Integer(request.getParameter("totalInventory")));
+		inventory.setLocation(request.getParameter("location"));
 		inventoryManagementService.updateInventory(inventory);
-		return new ModelAndView("success");
+		return new ModelAndView("completed-inventory-update.jsp", "inventory", inventory);
 	}
 
 	/**
@@ -96,14 +91,20 @@ public class InventoryManagementController {
 	 * @param model
 	 * @return
 	 */
+	@RequestMapping(value = "/confirmInventoryDelete", method = RequestMethod.POST)
+	public ModelAndView confirmDelete(HttpServletRequest request, Model model) {
+		logger.info("@RequestMapping(value = /confirmInventoryDelete, method = RequestMethod.POST) "
+				+ " public ModelAndView confirmDelete(HttpServletRequest request, Model model)");
+		Inventory inventory = inventoryManagementService.getInventory(new Integer(request.getParameter("id")));
+		return new ModelAndView("confirm-inventory-delete.jsp", "inventory", inventory);
+	}
 	@RequestMapping(value = "/deleteInventory", method = RequestMethod.POST)
 	public ModelAndView deletInventory(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /deleteInventory, method = RequestMethod.POST) "
 				+ " public ModelAndView deleteUser(HttpServletRequest request, Model model)");
-		Inventory inventory = new Inventory();
-		inventory.setId(new Integer(request.getParameter("inventoryId")));
+		Inventory inventory = inventoryManagementService.getInventory(new Integer(request.getParameter("id")));
 		inventoryManagementService.deleteInventory(inventory);
-		return new ModelAndView("success");
+		return new ModelAndView("completed-inventory-delete.jsp", "inventory", inventory);
 	}
 
 	/**

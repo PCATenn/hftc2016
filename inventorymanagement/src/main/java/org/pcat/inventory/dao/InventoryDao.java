@@ -86,32 +86,9 @@ public class InventoryDao extends BaseDao {
 	 * Method to update inventory information.
 	 * 
 	 * @param user
-	 * @return
 	 */
-	public boolean updateInventory(Inventory inventory) {
-		boolean isUpdated = false;
-		Transaction tx = null;
-		Session session = null;
-		try {
-			tx = session.beginTransaction();
-			Criteria criteria = session.createCriteria(Inventory.class);
-			criteria.add(Restrictions.eq("id", inventory.getId()));
-			Inventory updateInventory = (Inventory) criteria.list().get(0);
-			updateInventory.setProductName(inventory.getProductName());
-			updateInventory.setProductDesc(inventory.getProductDesc());
-			updateInventory.setTotalInventory(inventory.getTotalInventory());
-			getSession().update(updateInventory);
-			isUpdated = true;
-			tx.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
-		} finally {
-			if (session != null && session.isOpen()) {
-				session.close();
-			}
-		}
-		return isUpdated;
+	public void update(Inventory inventory) {
+		super.saveOrUpdate(inventory);
 	}
 
 	public Collection<Inventory> getCollectionByIds(final Collection<Integer> ids) {

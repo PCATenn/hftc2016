@@ -54,10 +54,9 @@ public class InventoryManagementService {
 	 * Method to update inventory information.
 	 * 
 	 * @param inventory
-	 * @return
 	 */
-	public boolean updateInventory(Inventory inventory) {
-		return inventoryDao.updateInventory(inventory);
+	public void updateInventory(Inventory inventory) {
+		 inventoryDao.update(inventory);
 	}
 
 	/**

@@ -73,16 +73,16 @@
                             Reserved Quantity:
                         </label>
                         &nbsp ${reservedInventory}
-                        <input type="number" id="reservedInventory" name="reservedInventory" class="input-field" style="width: 5rem;" value="${inventory.reservedInventory}"/>
+                        <input readonly type="number" id="reservedInventory" name="reservedInventory" class="input-field" style="width: 5rem;" value="${inventory.reservedInventory}"/>
                     </div>
                     <div class="add-form">
-                        <label for="updateProdLocation">
+                        <label for="location">
                             Location:
                         </label>
                         <select id="location" name="location" style="min-width: 16rem;"  >
-                            <option>Nashville</option>
-                            <option>Chattanooga</option>
-                            <option>Oak Ridge</option>
+                            <option value="Nashville">Nashville</option>
+                            <option value="Chattanooga">Chattanooga</option>
+                            <option value="Oak Ridge">Oak Ridge</option>
                         </select>
                    </div>
                                       <div style="margin-top: 3rem; display: flex; justify-content: center;">
@@ -90,7 +90,7 @@
                             Cancel
                         </button>
 
-                        <button type="submit" name="delete-item" class="button medium-button danger" formaction="${confirmDeleteUrl}">
+                        <button type="submit" name="delete-item" class="button medium-button danger" formaction="${confirmDeleteUrl}" formmethod="POST">
                             Delete this item
                         </button>
 
@@ -99,6 +99,7 @@
                         </button>
                     </div>
                       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                      <input type="hidden" name="id" value="${inventory.id}"/>
                 </form>
           </div>
         </section>
@@ -110,7 +111,7 @@
 
 </body>
 <script type="text/javascript">
-	var _csrf = ${_csrf.token};
+	var _csrf = "${_csrf.token}";
 	$(document).ready(function() {
 		console.log("attempting to update the select list with ${inventory.location}");
 		$('#location').val('${inventory.location}');
