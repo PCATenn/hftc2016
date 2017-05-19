@@ -62,14 +62,19 @@ function submitRequest(id)  {
 	}
     var qty = $('#qty'+id).val();
     var familyId = $('#request-items .input-field').val();
-    userId = $('#request-items input[name=userId]').val();
+    var userId = $('#request-items input[name=userId]').val();
+    var productName = $('#request-items input[name=productName]').val();
+    var productDesc = $('#request-items input[name=productDesc]').val();
+    var location = $('#request-items input[name=location]').val();
     var payload = {
-        "userId": userId,
         "familyId": familyId,
         "quantity": qty,
-        "inventoryId": id
+        "inventoryId": id,
+        "productName": productName,
+        "productDesc": productDesc,
+        "location": location
     };
-    var $form = $('<form method="POST" action="submitForRequestApproval"></form>');
+    var $form = $('<form method="POST" action="request/makeRequest"></form>');
     for (var key in payload) {
         $('<input>').attr('type','hidden').attr('name',key).attr('value',payload[key]).appendTo($form);
     }

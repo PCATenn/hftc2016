@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
@@ -10,9 +9,7 @@
 <script src="vendor/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="vendor/jquery.validate.min.js"></script>
 <script type="text/javascript" src="vendor/additional-methods.min.js"></script>
-
 <link rel="stylesheet" type="text/css" href="vendor/datatables.min.css" />
-
 <script type="text/javascript" src="vendor/datatables.min.js"></script>
 
 <script src="request.js"></script>

@@ -51,7 +51,7 @@ var url = "listPendingRequests"
 	        "userId": userId,
 	        "familyInventoryId": id
 	   };
-	    var $form = $('<form method="POST" action="requestApproval"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></form>');
+	    var $form = $('<form method="POST" action="supervisorApproved"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></form>');
 	    for (var key in payload) {
 	        $('<input>').attr('type','hidden').attr('name',key).attr('value',payload[key]).appendTo($form);
 	    }

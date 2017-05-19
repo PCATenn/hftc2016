@@ -98,6 +98,7 @@ public class InventoryManagementController {
 		Inventory inventory = inventoryManagementService.getInventory(new Integer(request.getParameter("id")));
 		return new ModelAndView("confirm-inventory-delete.jsp", "inventory", inventory);
 	}
+
 	@RequestMapping(value = "/deleteInventory", method = RequestMethod.POST)
 	public ModelAndView deletInventory(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /deleteInventory, method = RequestMethod.POST) "
