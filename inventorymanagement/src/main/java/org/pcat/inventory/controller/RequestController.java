@@ -62,10 +62,10 @@ public class RequestController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping(path="/submitForapproval")
-	public ModelAndView submitRequests(HttpServletRequest request, Model model) {
-		logger.info("@RequestMapping(value = /submitForapproval, method = RequestMethod.POST)	"
-				+ "public ModelAndView submitRequests(HttpServletRequest request, Model model)");
+	@PostMapping(path="/complete")
+	public ModelAndView completeRequest(HttpServletRequest request, Model model) {
+		logger.info("@RequestMapping(value = /complete-request, method = RequestMethod.POST)	"
+				+ "public ModelAndView completeRequest(HttpServletRequest request, Model model)");
 		int userId = getUserId();
 		String familyId = request.getParameter("familyId");
 		int inventoryId = Integer.valueOf(request.getParameter("inventoryId"));
@@ -82,22 +82,17 @@ public class RequestController {
 		HomeVisitor homeVisitor = userService.getHomeVisitor(userId);
 		logger.debug(String.format("requestItems(%s, %s, %s)", familyId, requestItems.toString(), homeVisitor.getLastName()));
 		requestFamilyItemsService.requestItems(familyId, requestItems, homeVisitor);
-		return new ModelAndView("request-submitted-confirmation.jsp");
+		return new ModelAndView("request-complete.jsp");
 	}
-	@RequestMapping(value = "/makeRequest", method = RequestMethod.POST)
-	public ModelAndView makeRequest(HttpServletRequest request, Model model) {
-		logger.info("@RequestMapping(value = /makeRequest, method = RequestMethod.POST)	"
-				+ "public ModelAndView makeRequest(HttpServletRequest request, Model model)");
+	@RequestMapping(value = "/begin", method = RequestMethod.POST)
+	public ModelAndView begin(HttpServletRequest request, Model model) {
+		logger.info("@RequestMapping(value = /begin, method = RequestMethod.POST)	"
+				+ "public ModelAndView begin(HttpServletRequest request, Model model)");
 		logger.debug(String.format("here is the model available:  %s", model.toString()));
 		int userId = getUserId();
 		String familyId = request.getParameter("familyId");
 		int inventoryId = Integer.valueOf(request.getParameter("inventoryId"));
-		int quantity = 1;
 		String requestQty = request.getParameter("quantity");
-
-		if (requestQty != null && !requestQty.trim().isEmpty()) {
-			quantity = Integer.valueOf(request.getParameter("quantity"));
-		}
 
 	    model.addAttribute("familyId", familyId);
 	    model.addAttribute("quantity", requestQty);
@@ -105,7 +100,8 @@ public class RequestController {
 	    model.addAttribute("productName", request.getParameter("productName"));
 	    model.addAttribute("productDesc", request.getParameter("productDesc"));
 	    model.addAttribute("location", request.getParameter("location"));
-		return new ModelAndView("request-proposal.jsp");
+	    logger.debug(String.format("here is the model exiting:  %s", model.toString()));
+		return new ModelAndView("request-preview.jsp");
 	}
 
 	private int getUserId() {

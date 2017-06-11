@@ -41,13 +41,12 @@ $(document).ready(function(){
             },
             { "targets": 4, "render":
               function(data, type, row, meta) {
-                  
                   return '<input  type="text" value="1" name="quantity" id="qty'+row.id+'" />';
               }
             },
             { "targets": 5, "render":
               function(data, type, row, meta) {
-                  return '<a class="requestApproval" onclick="submitRequest('+row.id+');">Request</a>';
+                  return '<a class="requestApproval" onclick="submitRequest('+meta.row+');">Request</a>';
               }
             }
         ]
@@ -55,26 +54,26 @@ $(document).ready(function(){
 
 });
 
-function submitRequest(id)  {
+function submitRequest( rowIndex)  {
 	if(!$("#request-items").valid()){
 		alert("Please check the family number and the quantity");
 		return;
 	}
-    var qty = $('#qty'+id).val();
+	var table = $("#dataTable").DataTable();
+	var rowdata = table.row(rowIndex).data();
+	console.log('row data: ' + rowdata);
+    var qty = $('#qty'+rowdata.id).val();
     var familyId = $('#request-items .input-field').val();
-    var userId = $('#request-items input[name=userId]').val();
-    var productName = $('#request-items input[name=productName]').val();
-    var productDesc = $('#request-items input[name=productDesc]').val();
-    var location = $('#request-items input[name=location]').val();
     var payload = {
         "familyId": familyId,
         "quantity": qty,
-        "inventoryId": id,
-        "productName": productName,
-        "productDesc": productDesc,
-        "location": location
+        "inventoryId": rowdata.id,
+        "productName": rowdata.productName,
+        "productDesc": rowdata.productDesc,
+        "location": rowdata.location
     };
-    var $form = $('<form method="POST" action="request/makeRequest"></form>');
+    console.log("payload: " + payload);
+    var $form = $('<form method="POST" action="request/begin"></form>');
     for (var key in payload) {
         $('<input>').attr('type','hidden').attr('name',key).attr('value',payload[key]).appendTo($form);
     }

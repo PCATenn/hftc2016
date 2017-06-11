@@ -5,19 +5,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="img/PCA-Logo_TN_2C_sm_ico.png" >
-    <script src="vendor/jquery-1.12.4.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="vendor/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
+    <link rel="icon" type="image/png" href="../img/PCA-Logo_TN_2C_sm_ico.png" >
+    <script src="../vendor/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../vendor/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/app.css" media="screen" />
     <title>Complete a request | PCAT Inventory Management</title>
 </head>
 <body>
 	<c:url var="returnUrl" value="/request.jsp"/>
-	<c:url var="completeRequestUrl" value="/complete-request.jsp"/>
+	<c:url var="completeRequestUrl" value="complete"/>
     <div class="content">
 		<header>
 	        <a href="http://www.pcat.org/">
-	            <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo" />
+	            <img src="../img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo" />
 	        </a>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
@@ -68,16 +68,16 @@
 							<input readonly="readonly" type="text" class="input-field" name="quantity" id="quantity" value="${quantity}">
 						</div>
 						<div class="dummy-prod dummy-table-row">
-							<input readonly="readonly" type="text" class="input-field" name="quantity" id="quantity" value="${productName}">
+							<input readonly="readonly" type="text" class="input-field" name="productName" id="productName" value="${productName}">
 						</div>
 						<div class="dummy-desc dummy-table-row">
-							<input readonly="readonly" type="text" class="input-field" name="quantity" id="quantity" value="${productDesc}">
+							<input readonly="readonly" type="text" class="input-field" name="productDesc" id="productDesc" value="${productDesc}">
 						</div>
 						<div class="dummy-loc dummy-table-row">
-							<input readonly="readonly" type="text" class="input-field" name="quantity" id="quantity" value="${location}">
+							<input readonly="readonly" type="text" class="input-field" name="location" id="location" value="${location}">
 						</div>
 						<div>
-							<input type="hidden" class="input-field" name="quantity" id="quantity" value="${inventoryId}">
+							<input type="hidden" class="input-field" name="inventoryId" id="inventoryId" value="${inventoryId}">
 						</div>
 					</div>
 					<div>

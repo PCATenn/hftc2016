@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../css/app.css" media="screen" />
     <title>Confirm a request | PCAT Inventory Management</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
     <div class="content">
         <header>
             <a href="http://www.pcat.org/">
-                <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
+                <img src="../img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
             </a>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
@@ -26,9 +26,9 @@
         <section>
 		     <nav id="nav-bar">
 		        <ul>
-		          <li>                    <a href="request.jsp">              request an item     </a>    </li>
+		          <li>                    <a href="../request.jsp">              request an item     </a>    </li>
 		        <sec:authorize access="hasRole('SUPERVISOR')">
-		          <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
+		          <li>                    <a href="../review-approvals.jsp">     review approvals    </a>    </li>
 		        </sec:authorize>
 		        <sec:authorize access="hasRole('ADMINISTRATOR')">
 		          <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
