@@ -16,7 +16,7 @@
             <a href="http://www.pcat.org/">
                 <img src="../img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
             </a>
-			<c:url var="logoutUrl" value="/login?logout"/>
+			<c:url var="logoutUrl" value="../login?logout"/>
 			<form action="${logoutUrl}"  method="post">
 				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -31,8 +31,8 @@
 		          <li>                    <a href="../review-approvals.jsp">     review approvals    </a>    </li>
 		        </sec:authorize>
 		        <sec:authorize access="hasRole('ADMINISTRATOR')">
-		          <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
-		          <li id="manage-users">  <a href="listAllUsers.jsp">         manage users        </a>    </li>
+		          <li id="manage-items">  <a href="../listAllInventories.jsp">   manage items        </a>    </li>
+		          <li id="manage-users">  <a href="../listAllUsers.jsp">         manage users        </a>    </li>
 		        </sec:authorize>
 		        </ul>
 		      </nav>
@@ -46,7 +46,7 @@
                     You’ll receive an email confirming your request.
                 </h3>
 
-                <button name="inventory-return" class="button medium-button affirmative" onclick="history.back(1)">
+                <button name="inventory-return" class="button medium-button affirmative"  onclick="window.location.href='../request.jsp'">
                     Return to inventory list
                 </button>
             </div>
