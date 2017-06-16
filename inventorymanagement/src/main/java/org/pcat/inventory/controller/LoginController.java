@@ -33,12 +33,6 @@ public class LoginController {
 	public void setUserLoginManagementService(LoginService loginService) {
 		this.loginService = loginService;
 	}
-//	@RequestMapping(value = "/login")
-	public String login(HttpServletRequest request, Model model) {
-		logger.info("@RequestMapping(value = /login)	"
-				+ "public ModelAndView isUserLoggedIn(HttpServletRequest request, Model model)");
-		return "<h1>Pigs</h1>";
-	}
 
 	/**
 	 * Method to validate user from the Database.
@@ -65,6 +59,8 @@ public class LoginController {
 			} else {
 				forward = "request.jsp";
 			}
+		}else{
+			throw new RuntimeException("invalid user or credentials");
 		}
 		return new ModelAndView(forward, "user", user);
 	}

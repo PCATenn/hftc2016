@@ -6,11 +6,19 @@ import org.springframework.core.style.ToStringCreator;
 
 public class FamilyInventoryDisplayRequest implements FamilyInventory {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6575250600640969642L;
+
 	private String requestor;
 
 	private String productName;
 	private FamilyInventory familyInventory;
 	private String location;
+	private Integer reservedInventory;
+	private Integer totalInventory;
+	private Integer availableInventory;
 
 	public FamilyInventoryDisplayRequest() {
 		super();
@@ -19,9 +27,9 @@ public class FamilyInventoryDisplayRequest implements FamilyInventory {
 
 	public FamilyInventoryDisplayRequest(Integer id, String familyId, Integer requestorId, String status,
 			Integer quantity, Timestamp requestedDate, Integer inventoryId, final String requestor,
-			final String location) {
-		super();
-		FamilyInventory familyInventory = new FamilyInventoryImpl();
+			final String location, final Integer reservedInventory, final Integer totalInventory,
+			final Integer availableInventory) {
+		this();
 		this.setFamilyInventory(familyInventory);
 		this.setId(id);
 		this.setFamilyId(familyId);
@@ -32,6 +40,14 @@ public class FamilyInventoryDisplayRequest implements FamilyInventory {
 		this.setStatus(status);
 		this.requestor = requestor;
 		this.location = location;
+		this.reservedInventory = reservedInventory;
+		this.totalInventory = totalInventory;
+		this.availableInventory = availableInventory;
+
+	}
+
+	public Integer getAvailableInventory() {
+		return availableInventory;
 	}
 
 	public String getFamilyId() {
@@ -74,8 +90,20 @@ public class FamilyInventoryDisplayRequest implements FamilyInventory {
 		return familyInventory.getRequestorId();
 	}
 
+	public Integer getReservedInventory() {
+		return reservedInventory;
+	}
+
 	public String getStatus() {
 		return familyInventory.getStatus();
+	}
+
+	public Integer getTotalInventory() {
+		return totalInventory;
+	}
+
+	public void setAvailableInventory(Integer availableInventory) {
+		this.availableInventory = availableInventory;
 	}
 
 	public void setFamilyId(String familyId) {
@@ -118,8 +146,16 @@ public class FamilyInventoryDisplayRequest implements FamilyInventory {
 		familyInventory.setRequestorId(requestorId);
 	}
 
+	public void setReservedInventory(Integer reservedInventory) {
+		this.reservedInventory = reservedInventory;
+	}
+
 	public void setStatus(String status) {
 		familyInventory.setStatus(status);
+	}
+
+	public void setTotalInventory(Integer totalInventory) {
+		this.totalInventory = totalInventory;
 	}
 
 	@Override

@@ -11,7 +11,7 @@ $(document).ready(function(){
 			"familyNumber": {
 				required: true,
 				minlength: 5,
-				pattern: /^\w{4}.*\d{4}/
+				pattern: /^\w{4}-\d{4}$/
 			},
 			"quantity": {
 				required: true,

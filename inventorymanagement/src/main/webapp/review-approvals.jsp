@@ -32,8 +32,10 @@ var url = "listPendingRequests"
 	            { "targets": 3, "data": "location" },
 	            { "targets": 4, "data": "quantity" },
 	            { "targets": 5, "data": "status" },
-	            { "targets": 7, "data": "id", "visible": true },
-	            { "targets": 6, "render":
+	            { "targets": 6, "data": "totalInventory"},
+	            { "targets": 7, "data": "reservedInventory"},
+	            { "targets": 8, "data": "availableInventory"},
+	            { "targets": 9, "render":
 	              function(data, type, row, meta) {
 	            	  console.log(row);
 	            	  console.log(row.id);
@@ -111,10 +113,12 @@ var url = "listPendingRequests"
                                     <th>Family</th>
                                     <th>Product</th>
                                     <th>Location</th>
-                                    <th>Quantity</th>
-                                    <th>Status</th>
+                                    <th>Quantity<br/>Requested</th>
+                                    <th>Request<br/>Status</th>
+                                    <th>Total<br/>Inventory</th>
+                                    <th>Total of<br/>Pending<br/>Requests</th>
+                                    <th>Available<br/>Inventory</th>
                                     <th>Action</th>
-                                    <th>Inventory Id</th>
                                 </tr>
                             </thead>
                         </table>

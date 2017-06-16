@@ -165,13 +165,7 @@ public class InventoryManagementController {
 		return new ModelAndView("update-item.jsp", "inventory", inventory);
 	}
 
-	/**
-	 * Method to delete inventory Details into Database.
-	 *
-	 * @param request
-	 * @param model
-	 * @return
-	 */
+
 	@RequestMapping(value = "/listPendingRequests")
 	@ResponseBody
 	public List<FamilyInventoryDisplayRequest> listPendingRequests(HttpServletRequest request, Model model) {

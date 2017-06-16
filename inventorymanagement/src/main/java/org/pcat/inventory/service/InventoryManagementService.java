@@ -83,14 +83,7 @@ public class InventoryManagementService {
 		return familyInventoryDisplayRequestDao.findAll();
 	}
 
-	public List<FamilyInventoryDisplayRequest> listAllFamilyInventoryDataRequestForSupervisor(
-			final String supervisorEmail) {
-		List<HomeVisitor> homeVisitors = userService.getHomeVisitorsFromSupervisorEmail(supervisorEmail);
-		List<Integer> homeVisitorIds = new ArrayList<Integer>();
-		homeVisitors.forEach(hv -> homeVisitorIds.add(hv.getId()));
-		return familyInventoryDisplayRequestDao.findAllForIds(homeVisitorIds);
-	}
-
+	
 	public Inventory getInventory(Integer id) {
 		return inventoryDao.getById(id);
 	}

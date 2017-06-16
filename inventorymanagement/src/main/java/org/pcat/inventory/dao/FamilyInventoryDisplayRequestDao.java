@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.pcat.inventory.model.FamilyInventoryDisplayRequest;
+import org.pcat.inventory.model.Inventory;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,7 +20,8 @@ public class FamilyInventoryDisplayRequestDao extends BaseDao {
 	}
 
 	public List<FamilyInventoryDisplayRequest> findAll() {
-		return (List<FamilyInventoryDisplayRequest>) super.findAll(FamilyInventoryDisplayRequest.class);
+		List<FamilyInventoryDisplayRequest> familyInventoryDisplayRequests = (List<FamilyInventoryDisplayRequest>) super.findAll(FamilyInventoryDisplayRequest.class);
+		return familyInventoryDisplayRequests;
 	}
 
 	public List<FamilyInventoryDisplayRequest> findAllForIds(List<Integer> homeVisitorIds) {

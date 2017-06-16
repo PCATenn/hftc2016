@@ -1,6 +1,5 @@
 package org.pcat.inventory.security.service;
 
-import org.pcat.inventory.dao.BaseDao;
 import org.pcat.inventory.dao.UserDao;
 import org.pcat.inventory.model.User;
 import org.pcat.inventory.security.model.PcatUserDetails;
