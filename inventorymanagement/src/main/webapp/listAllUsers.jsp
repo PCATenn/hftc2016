@@ -17,6 +17,7 @@
 	src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
 </head>
+
 <body>
 
 	<div class="content">
@@ -26,7 +27,7 @@
 				</a>
 				<c:url var="logoutUrl" value="/login?logout"/>
 				<form action="${logoutUrl}"  method="post">
-					<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+					<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
 			</header>
@@ -52,14 +53,14 @@
 				<table id="dataTable" class="dummy-inventory">
 					<thead>
 						<tr>
-							<th>User Id</th>
+							<th>User ID</th>
 							<th>First Name</th>
 							<th>Last Name</th>
-							<th>Email</th>
+							<th>Email Address</th>
 							<th>Role</th>
 							<th>Supervisor</th>
-							<th>Supervisor Email</th>
-							<th></th>
+							<th>Supervisor<br/>Email Address</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 				</table>

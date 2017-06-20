@@ -32,8 +32,10 @@ var url = "listPendingRequests"
 	            { "targets": 3, "data": "location" },
 	            { "targets": 4, "data": "quantity" },
 	            { "targets": 5, "data": "status" },
-	            { "targets": 7, "data": "id", "visible": true },
-	            { "targets": 6, "render":
+	            { "targets": 6, "data": "totalInventory"},
+	            { "targets": 7, "data": "reservedInventory"},
+	            { "targets": 8, "data": "availableInventory"},
+	            { "targets": 9, "render":
 	              function(data, type, row, meta) {
 	            	  console.log(row);
 	            	  console.log(row.id);
@@ -62,6 +64,7 @@ var url = "listPendingRequests"
 </script>
 
 </head>
+
 <body>
 
     <div class="content">
@@ -71,7 +74,7 @@ var url = "listPendingRequests"
             </a>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
-				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+				<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
         </header>
@@ -109,12 +112,14 @@ var url = "listPendingRequests"
                                 <tr>
                                     <th>Requester</th>
                                     <th>Family</th>
-                                    <th>Product</th>
+                                    <th>Item</th>
                                     <th>Location</th>
-                                    <th>Quantity</th>
-                                    <th>Status</th>
+                                    <th>Requested<br/>Quantity</th>
+                                    <th>Request<br/>Status</th>
+                                    <th>Total<br/>Inventory<br/>Quantity</th>
+                                    <th>Total<br/>Pending<br/>Approvals<br/>Quantity</th>
+                                    <th>Available<br/>Quantity</th>
                                     <th>Action</th>
-                                    <th>Inventory Id</th>
                                 </tr>
                             </thead>
                         </table>

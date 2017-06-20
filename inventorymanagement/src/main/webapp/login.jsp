@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
 <title>PCAT Inventory Management</title>
 </head>
+
 <body>
 
     <div class="content">

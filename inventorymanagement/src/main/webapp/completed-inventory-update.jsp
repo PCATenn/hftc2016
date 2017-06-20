@@ -7,8 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
-    <title>Confirm a request | PCAT Inventory Management</title>
+    <title>Item updated | PCAT Inventory Management</title>
 </head>
+
 <body>
 	<c:url var="returnUrl" value="/listAllInventories.jsp"/>
     <div class="content">
@@ -18,7 +19,7 @@
             </a>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
-				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+				<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
         </header>
@@ -39,7 +40,7 @@
 
             <div class="section-body">
                 <h2>
-                    Your update has been successful.
+                    Item updated.
                 </h2>
                     <div class="add-form">
                         <label for="updateProdName">
@@ -75,7 +76,7 @@
                    </div>
                    <form>
  				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <button type="submit" name="inventory-return" class="button medium-button affirmative" formaction="${returnUrl}">
+                <button type="submit" name="inventory-return" style="margin-top: 3rem;" class="button medium-button affirmative" formaction="${returnUrl}">
                     Return to inventory list
                 </button>
                 </form>

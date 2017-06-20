@@ -7,8 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
-    <title>Confirm a request | PCAT Inventory Management</title>
+    <title>Confirm item deletion | PCAT Inventory Management</title>
 </head>
+
 <body>
 	<c:url var="deleteUrl" value="/deleteInventory"/>
 	<c:url var="cancelUrl" value="/listAllInventories.jsp"/>
@@ -19,7 +20,7 @@
             </a>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
-				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+				<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
         </header>
@@ -40,41 +41,46 @@
 
             <div class="section-body">
                 <h2>
-                    Delete item confirmation
+                    Confirm item deletion
                 </h2>
-                    <div class="add-form">
-                        <label for="updateProdName">
-                            Product name:
-                        </label>
-                        <span class="input-field" style="width: 20rem;">${inventory.productName }</span>
-                    </div>
-                    <div class="add-form">
-                        <label for="updateProdDescription">
-                            Product Description:
-                        </label>
-                        <span class="input-field" style="width: 20rem;" >${inventory.productDesc}</span>
-                    </div>
 
-                    <div class="add-form">
-                        <label for="updateProdQuantity">
-                            Quantity:
-                        </label>
-                        <span class="input-field" style="width: 5rem;">${inventory.totalInventory}"</span>
-                    </div>
-                   <div class="add-form">
-                        <label for="updateProdQuantity">
-                            Reserved Quantity:
-                        </label>
-                       <span class="input-field" style="width: 5rem;">${inventory.reservedInventory}</span>
-                    </div>
-                    <div class="add-form">
-                        <label for="updateProdLocation">
-                            Location:
-                        </label>
-                       <span class="input-field" style="width: 5rem;">${inventory.location}</span>
-                        
-                   </div>
-              <form>
+                <h3>
+                    Are you sure you want to delete?
+                </h3>
+
+                <div class="add-form">
+                    <label for="updateProdName">
+                        Product name:
+                    </label>
+                    <span class="input-field" style="width: 20rem;">${inventory.productName }</span>
+                </div>
+                <div class="add-form">
+                    <label for="updateProdDescription">
+                        Product Description:
+                    </label>
+                    <span class="input-field" style="width: 20rem;" >${inventory.productDesc}</span>
+                </div>
+
+                <div class="add-form">
+                    <label for="updateProdQuantity">
+                        Quantity:
+                    </label>
+                    <span class="input-field" style="width: 5rem;">${inventory.totalInventory}"</span>
+                </div>
+                <div class="add-form">
+                    <label for="updateProdQuantity">
+                        Reserved Quantity:
+                    </label>
+                   <span class="input-field" style="width: 5rem;">${inventory.reservedInventory}</span>
+                </div>
+                <div class="add-form">
+                    <label for="updateProdLocation">
+                        Location:
+                    </label>
+                   <span class="input-field" style="width: 5rem;">${inventory.location}</span>
+
+                </div>
+                <form>
 	 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	 				<input type="hidden" name="id" value="${inventory.id}" />
 	                <button type="submit" name="cancel-request" class="button medium-button neutral" formaction="${cancelUrl}">
@@ -84,7 +90,7 @@
 	                	formmethod="POST" formaction="${deleteUrl}" >
 	                    Delete Item
 	                </button>
-             </form>
+                </form>
             </div>
         </section>
     </div>

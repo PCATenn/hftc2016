@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../css/app.css" media="screen" />
-    <title>Confirm a request | PCAT Inventory Management</title>
+    <title>Request forwarded | PCAT Inventory Management</title>
 </head>
 <body>
 
@@ -18,7 +18,7 @@
             </a>
 			<c:url var="logoutUrl" value="../login?logout"/>
 			<form action="${logoutUrl}"  method="post">
-				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+				<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
         </header>

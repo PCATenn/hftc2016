@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
 <title>Request an item | PCAT inventory</title>
 </head>
+
 <body>
 	<div class="content">
 		<header>
@@ -24,7 +25,7 @@
 			</a>
 		<c:url var="logoutUrl" value="/login?logout"/>
 		<form action="${logoutUrl}"  method="post">
-			<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+			<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		</form>
 		</header>
@@ -52,8 +53,9 @@
 					<div class="inline-directive">
 						<h2>Enter the family number:</h2>
 
-						<label><input type="text" name="familyNumber"
-							class="input-field">&nbspi.e.&nbsp(XXXX-0000)</label>
+						<label><input type="text" name="familyNumber" class="input-field">
+							&nbsp &nbsp i.e. &nbsp(XXXX-0000)
+                        </label>
 					</div>
 
 					<h2 style="margin: -2rem 5rem 3rem 5rem">
@@ -65,11 +67,11 @@
 						<table id="dataTable" name="dataTable">
 							<thead>
 								<tr>
-									<th>Product Name</th>
+									<th>Item</th>
 									<th>Description</th>
 									<th>Location</th>
-									<th>Available</th>
-									<th>Qty</th>
+									<th>Available<br/>Quantity</th>
+									<th>Requested<br/>Quantity</th>
 									<th>Action</th>
 								</tr>
 							</thead>
