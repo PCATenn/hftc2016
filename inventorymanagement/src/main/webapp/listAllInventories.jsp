@@ -16,6 +16,7 @@
 	src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
 </head>
+
 <body>
 
 	<div class="content">
@@ -25,7 +26,7 @@
 				</a>
 				<c:url var="logoutUrl" value="/login?logout"/>
 				<form action="${logoutUrl}"  method="post">
-					<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+					<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
 			</header>
@@ -45,23 +46,23 @@
 		      </nav>
 
 				<div class="section-body">
-					<h1>Manage inventory</h1>
+					<h1>Manage items</h1>
 
 
 					<table id="dataTable" class="dummy-inventory">
 						<thead>
 							<tr>
-								<th >Inventory Id</th>
-								<th >Product Name</th>
-								<th >Product Description</th>
-								<th >Quantity</th>
+								<th >Inventory ID</th>
+								<th >Item</th>
+								<th >Description</th>
 								<th >Location</th>
-								<th ></th>
+								<th >Quantity</th>
+								<th >Action</th>
 							</tr>
 						</thead>
 					</table>
 
-					<button name="add-item" class="button medium-button affirmative">
+					<button name="add-item" style="margin-top: 3rem;" class="button medium-button affirmative">
 						Add an item
 					</button>
 
@@ -87,8 +88,8 @@
 				{ "data": "id" },
 	            { "data": "productName" },
 	            { "data": "productDesc" },
-	            { "data": "totalInventory" },
 	            { "data": "location" },
+	            { "data": "totalInventory" },
 	            { "render": function(data, type, row, meta) {
 	                  return '<input type="hidden" name="inventoryId"><a class="update_delete" onclick="submitRequest(' + row.id + ');">Update/Delete</a>';
 	              }

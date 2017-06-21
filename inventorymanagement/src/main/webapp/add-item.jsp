@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
     <title>Add an item | PCAT Inventory Management</title>
 </head>
+
 <body>
 
     <div class="content">
@@ -19,7 +20,7 @@
             <span><h2 style="margin: 0rem 5rem 3rem 5rem">${System.getenv("PCAT_ENVIRONTMENT_DISPLAY_TEXT")}</h2></span>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
-				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+				<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
         </header>
@@ -55,7 +56,7 @@
 
             <div class="section-body">
                 <h1>
-                    Add an inventory item
+                    Add an item
                 </h1>
 
                 <form style="margin: -3rem 5rem 3rem 5rem;">

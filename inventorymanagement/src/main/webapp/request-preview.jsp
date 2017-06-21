@@ -21,7 +21,7 @@
 	        </a>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
-				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+				<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
         </header>
@@ -51,38 +51,46 @@
 
     				<label><input readonly="readonly"  type="text" class="input-field" name="familyId" id="familyId" value="${familyId}"/></label>
 				</div>
-				<div class="item-box">
+				<div>
 				    <h4>
-				        Items You’re requesting:
+				        Item You’re requesting:
 				    </h4>
-				    <div class="dummy-inventory">
-				        <div class="dummy-inventory-label-row">
-				            <p style="padding-left: 0;">Qty</p>
-				       		<p style="padding-left: 1.75rem;">Product #</p>
-				       		<p style="padding-left: 2.75rem;">Description</p>
-				       		<p style="padding-left: 14.25rem;">Location</p>
-				       	</div>
-				   </div>
-					<div class="dummy-inventory-row">
-						<div class="dummy-qty dummy-table-row confirm">
-							<input readonly="readonly" type="text" class="input-field" name="quantity" id="quantity" value="${quantity}">
-						</div>
-						<div class="dummy-prod dummy-table-row">
-							<input readonly="readonly" type="text" class="input-field" name="productName" id="productName" value="${productName}">
-						</div>
-						<div class="dummy-desc dummy-table-row">
-							<input readonly="readonly" type="text" class="input-field" name="productDesc" id="productDesc" value="${productDesc}">
-						</div>
-						<div class="dummy-loc dummy-table-row">
-							<input readonly="readonly" type="text" class="input-field" name="location" id="location" value="${location}">
-						</div>
-						<div>
-							<input type="hidden" class="input-field" name="inventoryId" id="inventoryId" value="${inventoryId}">
-						</div>
-					</div>
-					<div>
+
+                    <div class="add-form">
+                        <label for="confirmProdName">
+                            Item:
+                        </label>
+                        <input readonly="readonly" type="text" id="productName" name="productName" class="input-field" style="width: 20rem;" value="${productName}"/>
+                    </div>
+
+                    <div class="add-form">
+                        <label for="confirmProdDesc">
+                            Description:
+                        </label>
+                        <input readonly="readonly" type="text" id="productDesc" name="productDesc" class="input-field" style="width: 20rem;" value="${productDesc}"/>
+                    </div>
+
+                    <div class="add-form">
+                        <label for="confirmLocation">
+                            Location:
+                        </label>
+                        <input readonly="readonly" type="text" id="location" name="location" class="input-field" style="width: 20rem;" value="${location}"/>
+                    </div>
+
+                    <div class="add-form">
+                        <label for="confirmQuantity">
+                            Requested Quantity:
+                        </label>
+                        <input readonly="readonly" type="text" id="quantity" name="quantity" class="input-field" style="width: 20rem;" value="quantity"/>
+                    </div>
+
+                    <div>
+                        <input type="hidden" class="input-field" name="inventoryId" id="inventoryId" value="${inventoryId}">
+                    </div>
+
+                    <div style="margin-top: 3rem;">
 						<button name="cancel-request" class="button medium-button neutral" formaction="${returnUrl}">
-							Start over
+							Cancel
 						</button>
 						<button name="submit-request" class="button medium-button affirmative" formaction="${completeRequestUrl}" formmethod="POST">
 							Submit for approval

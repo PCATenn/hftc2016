@@ -10,6 +10,7 @@
     <title>Update an item | PCAT Inventory Management</title>
     <script src="http://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
+
 <body>
 <c:url var="logoutUrl" value="/login?logout"/>
 <c:url var="cancelUrl" value="/listAllInventories.jsp"/>
@@ -21,7 +22,7 @@
                 <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
             </a>
 			<form action="${logoutUrl}"  method="post">
-				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+				<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
        </header>
@@ -53,8 +54,6 @@
                         <input type="text" id="productName" name="productName" class="input-field" style="width: 20rem;" value="${inventory.productName }"/>
                     </div>
 
-	private String location; <br/> ${inventory.location}
-
                     <div class="add-form">
                         <label for="updateProdDescription">
                             Product Description:
@@ -68,7 +67,7 @@
                         </label>
                         <input type="number" id="totalInventory" name="totalInventory" class="input-field" style="width: 5rem;" value="${inventory.totalInventory}"/>
                     </div>
-                   <div class="add-form">
+                    <div class="add-form">
                         <label for="updateProdQuantity">
                             Reserved Quantity:
                         </label>
@@ -84,8 +83,8 @@
                             <option value="Chattanooga">Chattanooga</option>
                             <option value="Oak Ridge">Oak Ridge</option>
                         </select>
-                   </div>
-                                      <div style="margin-top: 3rem; display: flex; justify-content: center;">
+                    </div>
+                    <div style="margin-top: 3rem; display: flex; justify-content: center;">
                         <button type="submit" name="cancel-request" class="button medium-button neutral" formaction="${cancelUrl}">
                             Cancel
                         </button>

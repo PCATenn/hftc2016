@@ -7,8 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
-    <title>Confirm an approval | PCAT Inventory Management</title>
+    <title>Request approved | PCAT Inventory Management</title>
 </head>
+
 <body>
 
     <div class="content">
@@ -18,7 +19,7 @@
             </a>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
-				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+				<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
         </header>

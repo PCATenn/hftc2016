@@ -64,6 +64,7 @@ var url = "listPendingRequests"
 </script>
 
 </head>
+
 <body>
 
     <div class="content">
@@ -73,7 +74,7 @@ var url = "listPendingRequests"
             </a>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
-				<input type="submit" name="logout" class="button logout-button neutral" value="Log Out"/>
+				<input type="submit" name="logout" class="button logout-button neutral" value="Log out"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			</form>
         </header>
@@ -111,13 +112,13 @@ var url = "listPendingRequests"
                                 <tr>
                                     <th>Requester</th>
                                     <th>Family</th>
-                                    <th>Product</th>
+                                    <th>Item</th>
                                     <th>Location</th>
-                                    <th>Quantity<br/>Requested</th>
+                                    <th>Requested<br/>Quantity</th>
                                     <th>Request<br/>Status</th>
-                                    <th>Total<br/>Inventory</th>
-                                    <th>Total of<br/>Pending<br/>Requests</th>
-                                    <th>Available<br/>Inventory</th>
+                                    <th>Total<br/>Inventory<br/>Quantity</th>
+                                    <th>Total<br/>Pending<br/>Approvals<br/>Quantity</th>
+                                    <th>Available<br/>Quantity</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

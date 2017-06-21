@@ -19,7 +19,7 @@ $(document).ready(function(){
 			}
 		},
 		messages: {
-			"familyNumber": "&nbsp Please enter a 4 character county followed by 4 Numbers",
+			"familyNumber": "&nbsp Please enter the first 4 letters of the county, a dash, and 4 numbers",
 			"quantity": "Quantity must be entered"
 		}
 		
