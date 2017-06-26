@@ -84,7 +84,7 @@ var url = "listPendingRequests"
 	        <ul>
 	          <li>                    <a href="request.jsp">              request an item     </a>    </li>
 	        <sec:authorize access="hasRole('SUPERVISOR')">
-	          <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
+	          <li class="current-link">                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
 	        </sec:authorize>
 	        <sec:authorize access="hasRole('ADMINISTRATOR')">
 	          <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
