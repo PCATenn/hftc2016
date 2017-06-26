@@ -116,9 +116,9 @@ var url = "listPendingRequests"
                                     <th>Location</th>
                                     <th>Requested<br/>Quantity</th>
                                     <th>Request<br/>Status</th>
-                                    <th>Total<br/>Inventory<br/>Quantity</th>
-                                    <th>Total<br/>Pending<br/>Approvals<br/>Quantity</th>
-                                    <th>Available<br/>Quantity</th>
+                                    <th title="Total quantity of this item in our inventory">Total<br/>Inventory<br/>Quantity</th>
+                                    <th title="Total quantity of this item in all pending approvals">Total<br/>Pending<br/>Approvals<br/>Quantity</th>
+                                    <th title="Total Inventory Quantity minus Total Pending Approvals Quantity">Available<br/>Quantity</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
