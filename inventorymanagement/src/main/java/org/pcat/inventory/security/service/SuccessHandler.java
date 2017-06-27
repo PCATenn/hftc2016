@@ -42,7 +42,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (GrantedAuthority authority : authorities) {
 			logger.debug(String.format("contained authority is %s", authority.getAuthority()));
-			if (authority.getAuthority().equals(PcatUserDetails.ADMINISTRATOR)) {
+			if (authority.getAuthority().equals(PcatUserDetails.ROLE_ADMINISTRATOR)) {
 				admin = true;
 				break;
 			}
