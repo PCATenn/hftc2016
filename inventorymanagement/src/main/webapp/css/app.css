@@ -99,7 +99,8 @@ nav li:after {
     transition: background-color 1s ease;
 }
 
-nav li:hover:after {
+nav li:hover:after,
+nav li.current-link:after {
     background: #005dab;                        /* pcat dark blue */
 }
 

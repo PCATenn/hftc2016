@@ -39,7 +39,7 @@
 		          <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
 		        </sec:authorize>
 		        <sec:authorize access="hasRole('ADMINISTRATOR')">
-		          <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
+		          <li id="manage-items" class="current-link">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
 		          <li id="manage-users">  <a href="listAllUsers.jsp">         manage users        </a>    </li>
 		        </sec:authorize>
 		        </ul>
