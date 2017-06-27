@@ -81,7 +81,7 @@
                         <label for="confirmQuantity">
                             Requested Quantity:
                         </label>
-                        <input readonly="readonly" type="text" id="quantity" name="quantity" class="input-field" style="width: 20rem;" value="quantity"/>
+                        <input readonly="readonly" type="text" id="quantity" name="quantity" class="input-field" style="width: 20rem;" value="${quantity}"/>
                     </div>
 
                     <div>
