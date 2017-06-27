@@ -53,7 +53,7 @@
 				</div>
 				<div>
 				    <h4>
-				        Item You’re requesting:
+				        Item you’re requesting:
 				    </h4>
 
                     <div class="add-form">

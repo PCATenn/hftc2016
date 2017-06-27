@@ -43,7 +43,7 @@
                 </h2>
 
                 <h3>
-                    You’ll receive an email confirming your request.
+                    You’ll receive an email confirming your request, and another if the request is approved.
                 </h3>
 
                 <button name="inventory-return" class="button medium-button affirmative"  onclick="window.location.href='../request.jsp'">
