@@ -68,13 +68,6 @@
                         <input type="number" id="totalInventory" name="totalInventory" class="input-field" style="width: 5rem;" value="${inventory.totalInventory}"/>
                     </div>
                     <div class="add-form">
-                        <label for="updateProdQuantity">
-                            Reserved Quantity:
-                        </label>
-                        &nbsp ${reservedInventory}
-                        <input readonly type="number" id="reservedInventory" name="reservedInventory" class="input-field" style="width: 5rem;" value="${inventory.reservedInventory}"/>
-                    </div>
-                    <div class="add-form">
                         <label for="location">
                             Location:
                         </label>

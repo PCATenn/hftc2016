@@ -135,31 +135,12 @@ public class InventoryManagementController {
 		return inventoryManagementService.listAllInventory();
 	}
 
-	/**
-	 * Method to delete inventory Details into Database.
-	 *
-	 * @param request
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/gotoComplete", method = RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView gotoComplete(HttpServletRequest request, Model model) {
-		logger.info("@RequestMapping(value = /gotoComplete, method = RequestMethod.POST)	"
-				+ "@ResponseBody	public ModelAndView gotoComplete(HttpServletRequest request, Model model)");
-		Inventory inventory = new Inventory();
-		inventory.setId(new Integer(request.getParameter("id")));
-		inventory.setLocation(request.getParameter("location"));
-		inventory.setProductName(request.getParameter("productName"));
-		inventory.setProductDesc(request.getParameter("productDesc"));
-		return new ModelAndView("complete-request.jsp", "inventory", inventory);
-	}
 
 	@RequestMapping(value = "/getInventoryItem", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView getInventoryItem(HttpServletRequest request, Model model) {
 		logger.info("@RequestMapping(value = /getInventoryItem, method = RequestMethod.POST)	"
-				+ "@ResponseBody	public ModelAndView gotoComplete(HttpServletRequest request, Model model)");
+				+ "@ResponseBody	public ModelAndView getInventoryItem(HttpServletRequest request, Model model)");
 		Integer id = new Integer(request.getParameter("id"));
 		Inventory inventory = inventoryManagementService.getInventory(id);
 		return new ModelAndView("update-item.jsp", "inventory", inventory);

@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../css/app.css" media="screen" />
     <title>Request approved | PCAT Inventory Management</title>
 </head>
 
@@ -15,7 +15,7 @@
     <div class="content">
         <header>
             <a href="http://www.pcat.org/">
-                <img src="img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
+                <img src="../img/PCA-Logo_TN_2C_sm.jpg" alt="PCAT logo" class="pcat-logo">
             </a>
 			<c:url var="logoutUrl" value="/login?logout"/>
 			<form action="${logoutUrl}"  method="post">
