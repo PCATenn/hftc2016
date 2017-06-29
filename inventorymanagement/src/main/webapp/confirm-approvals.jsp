@@ -44,7 +44,7 @@
                 </h2>
 
                 <h3>
-                    You’ll receive an email confirming your approval of the request.
+                    You and the requester will receive emails confirming your approval of the request.
                 </h3>
 
                 <button name="approvals-return" class="button medium-button affirmative" onclick="history.back(1)">
