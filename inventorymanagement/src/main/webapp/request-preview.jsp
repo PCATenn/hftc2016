@@ -41,7 +41,7 @@
 			</nav>
 		<div class="section-body">
 	        <h1>
-	            Complete your request
+	            complete your request
 	        </h1>
 			<form action="submitForapproval" id="request-items" style="padding: 0 5rem;">
 				<div class="inline-directive">

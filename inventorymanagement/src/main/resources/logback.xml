@@ -17,7 +17,6 @@
 	<logger name="org.springframework.jndi" level="info" />
 	<logger name="org.springframework.orm" level="info" />
 	<logger name="org.springframework.aop" level="info" />
-	<logger name="org.pcat.inventory" level="debug" />
 	<root level="${root-level:-INFO}">
 		<appender-ref ref="CONSOLE" />
 	</root>

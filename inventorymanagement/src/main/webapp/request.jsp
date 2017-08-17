@@ -31,20 +31,9 @@
 		</header>
 
 		<section>
-	      <nav id="nav-bar">
-	        <ul>
-	          <li class="current-link">                    <a href="request.jsp">              request an item     </a>    </li>
-	        <sec:authorize access="hasRole('SUPERVISOR')">
-	          <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
-	        </sec:authorize>
-	        <sec:authorize access="hasRole('ADMINISTRATOR')">
-	          <li id="manage-items">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
-	          <li id="manage-users">  <a href="listAllUsers.jsp">         manage users        </a>    </li>
-	        </sec:authorize>
-	        </ul>
-	      </nav>
+			<jsp:include page="menu.jsp"></jsp:include>
 			<div class="section-body">
-				<h1>Request an item from our inventory</h1>
+				<h1>request an item from our inventory</h1>
 
 				<form action="foo" id="request-items" style="padding: 0 5rem;">
 

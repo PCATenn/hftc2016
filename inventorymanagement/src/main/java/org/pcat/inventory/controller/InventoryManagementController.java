@@ -135,7 +135,6 @@ public class InventoryManagementController {
 		return inventoryManagementService.listAllInventory();
 	}
 
-
 	@RequestMapping(value = "/getInventoryItem", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView getInventoryItem(HttpServletRequest request, Model model) {
@@ -146,6 +145,13 @@ public class InventoryManagementController {
 		return new ModelAndView("update-item.jsp", "inventory", inventory);
 	}
 
+	@RequestMapping(value = "/listAllRequests")
+	@ResponseBody
+	public List<FamilyInventoryDisplayRequest> listAllRequests(HttpServletRequest request, Model model) {
+		logger.info("	@RequestMapping(value = /listAllRequests)	@ResponseBody	"
+				+ "public List<FamilyInventoryDisplayRequest> listAllRequests(HttpServletRequest request, Model model) ");
+		return inventoryManagementService.listAllFamilyInventoryDataRequest();
+	}
 
 	@RequestMapping(value = "/listPendingRequests")
 	@ResponseBody
@@ -153,7 +159,7 @@ public class InventoryManagementController {
 		logger.info("	@RequestMapping(value = /listPendingRequests)	@ResponseBody	"
 				+ "public List<FamilyInventoryDisplayRequest> listAllInventoryPending(HttpServletRequest request, Model model) ");
 		if (request.isUserInRole(PcatUserDetails.ROLE_ADMINISTRATOR)) {
-			return inventoryManagementService.listAllFamilyInventoryDataRequest();
+			return inventoryManagementService.listAllPendingFamilyInventoryDataRequest();
 		}
 		PcatUserDetails pcatUserDetails = (PcatUserDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();

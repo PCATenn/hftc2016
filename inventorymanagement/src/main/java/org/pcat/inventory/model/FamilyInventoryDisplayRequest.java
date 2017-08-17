@@ -165,6 +165,6 @@ public class FamilyInventoryDisplayRequest implements FamilyInventory {
 				.append("inventory id", this.getInventoryId()).append("location", this.getLocation())
 				.append("product name", this.getProductName()).append("quantity", this.getQuantity())
 				.append("requested date", this.getRequestedDate()).append("requestor", this.getRequestor())
-				.append("requestor id", this.getRequestorId()).toString();
+				.append("requestor id", this.getRequestorId()).append("status", this.getStatus()).toString();
 	}
 }

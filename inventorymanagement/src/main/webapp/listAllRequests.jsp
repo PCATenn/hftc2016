@@ -8,22 +8,43 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="img/PCA-Logo_TN_2C_sm_ico.png">
     <script src="vendor/jquery-1.12.4.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="vendor/datatables.min.css"/>
 
-    <script type="text/javascript" src="vendor/datatables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css">
+	
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.4.0/js/buttons.flash.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js">
+	</script>
 
     <link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
-    <title>Review approvals | PCAT Inventory Management</title>
+    <title>All Requests | PCAT Inventory Management</title>
 
 <script type="text/javascript">
 
-var url = "listPendingRequests"
+	var url = "listAllRequests";
 	$(document).ready(function(){
 	    $('#dataTable').DataTable( {
 	        "ajax": {
 	            "url": url,
 	            "dataSrc": ""
 	        },
+	        dom: 'Bfrtip',
+			buttons: [
+				'copy', 'csv', 'excel', 'pdf', 'print'
+			],
 	        "columnDefs": [
 	            { "targets": "_all", "className": "table-cell" },
 	            { "targets": 0, "data": "requestor"},
@@ -32,31 +53,9 @@ var url = "listPendingRequests"
 	            { "targets": 3, "data": "location" },
 	            { "targets": 4, "data": "quantity" },
 	            { "targets": 5, "data": "status" },
-	            { "targets": 6, "data": "totalInventory"},
-	            { "targets": 7, "data": "reservedInventory"},
-	            { "targets": 8, "data": "availableInventory"},
-	            { "targets": 9, "render":
-	              function(data, type, row, meta) {
-	                  return '<a onclick="approveRequest('+row.id+');">Approve</a>';
-	              }
-	            }
 	        ]
 	    } );
 	});
-
-	function approveRequest(id)  {
-	    userId = $('#request-items input[name=userId]').val();
-	    var payload = {
-	        "userId": userId,
-	        "familyInventoryId": id
-	   };
-	    var $form = $('<form method="POST" action="request/supervisorApproved"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></form>');
-	    for (var key in payload) {
-	        $('<input>').attr('type','hidden').attr('name',key).attr('value',payload[key]).appendTo($form);
-	    }
-	    $(document.body).append($form)
-	    $form.submit();
-	}
 
 </script>
 
@@ -80,16 +79,12 @@ var url = "listPendingRequests"
 			<jsp:include page="menu.jsp"></jsp:include>
             <div class="section-body">
                 <h1>
-                    Review pending approvals
+                    all requests 
                 </h1>
 
                 <form action="foo" id="request-items" style="padding: 0 5rem;">
 
                     <input type="hidden" name="userId" value="${user.id}">
-
-                    <h2 style="margin: -2rem 5rem 3rem 5rem">
-                        Approve a request by clicking the Approve button for an item:
-                    </h2>
 
                     <div style="padding: 0 5rem;">
                         <table id="dataTable">
@@ -101,10 +96,6 @@ var url = "listPendingRequests"
                                     <th>Location</th>
                                     <th>Requested<br/>Quantity</th>
                                     <th>Request<br/>Status</th>
-                                    <th title="Total quantity of this item in our inventory">Total<br/>Inventory<br/>Quantity</th>
-                                    <th title="Total quantity of this item in all pending approvals">Total<br/>Pending<br/>Approvals<br/>Quantity</th>
-                                    <th title="Total Inventory Quantity minus Total Pending Approvals Quantity">Available<br/>Quantity</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                         </table>

@@ -56,7 +56,7 @@ public class InventoryManagementService {
 	 * @param inventory
 	 */
 	public void updateInventory(Inventory inventory) {
-		 inventoryDao.update(inventory);
+		inventoryDao.update(inventory);
 	}
 
 	/**
@@ -83,7 +83,10 @@ public class InventoryManagementService {
 		return familyInventoryDisplayRequestDao.findAll();
 	}
 
-	
+	public List<FamilyInventoryDisplayRequest> listAllPendingFamilyInventoryDataRequest() {
+		return familyInventoryDisplayRequestDao.findAllPending();
+	}
+
 	public Inventory getInventory(Integer id) {
 		return inventoryDao.getById(id);
 	}

@@ -1,5 +1,7 @@
 package org.pcat.inventory.dao;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,6 @@ public class FamilyInventoryDisplayRequestDaoTest extends AbstractTransactionalJ
 	@BeforeClass
 	public static void setup() {
 		testHelper.saveCurrentRootLogging();
-		testHelper.setRootTestLoggerLevel(Level.DEBUG);
 	}
 
 	@AfterClass
@@ -52,6 +53,13 @@ public class FamilyInventoryDisplayRequestDaoTest extends AbstractTransactionalJ
 		ids.add(new Integer(42));
 		requests = familyInventoryDisplayRequestDao.findAllForIds(ids);
 
+	}
+	@Test
+	public void allPendingTest() {
+		
+		List<FamilyInventoryDisplayRequest> requests = familyInventoryDisplayRequestDao.findAllPending();
+		
+		requests.forEach(request -> logger.debug("Request: {}", request));
 	}
 
 }

@@ -5,7 +5,8 @@
 			<Pattern>%d [%thread] %-5level %logger{136} - %msg%n</Pattern>
 		</layout>
 	</appender>
-	<root level="${root-level:-DEBUG}">
+	<logger name="org.pcat.inventory" level="debug" />
+	<root level="${root-level:-INFO}">
 		<appender-ref ref="CONSOLE" />
 	</root>
 </configuration>

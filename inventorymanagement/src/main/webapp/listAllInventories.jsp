@@ -5,16 +5,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
-<title>Manage items | PCAT Inventory Management</title>
-
-<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-<script
-	src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/app.css" media="screen" />
+	<title>Manage items | PCAT Inventory Management</title>
+	
+	<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css">
+	
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.4.0/js/buttons.flash.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.4.0/js/buttons.html5.min.js">
+	</script>
+	<script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.4.0/js/buttons.print.min.js">
+	</script>
 </head>
 
 <body>
@@ -32,21 +46,9 @@
 			</header>
 
 			<section>
-		     <nav id="nav-bar">
-		        <ul>
-		          <li>                    <a href="request.jsp">              request an item     </a>    </li>
-		        <sec:authorize access="hasRole('SUPERVISOR')">
-		          <li>                    <a href="review-approvals.jsp">     review approvals    </a>    </li>
-		        </sec:authorize>
-		        <sec:authorize access="hasRole('ADMINISTRATOR')">
-		          <li id="manage-items" class="current-link">  <a href="listAllInventories.jsp">   manage items        </a>    </li>
-		          <li id="manage-users">  <a href="listAllUsers.jsp">         manage users        </a>    </li>
-		        </sec:authorize>
-		        </ul>
-		      </nav>
-
+			<jsp:include page="menu.jsp"></jsp:include>
 				<div class="section-body">
-					<h1>Manage items</h1>
+					<h1>manage items</h1>
 
 
 					<table id="dataTable" class="dummy-inventory">
@@ -84,6 +86,10 @@
 	            "url": url,
 	            "dataSrc": ""
 	        },
+	        dom: 'Bfrtip',
+			buttons: [
+				'copy', 'csv', 'excel', 'pdf', 'print'
+			],
 	        "columns": [
 				{ "data": "id" },
 	            { "data": "productName" },

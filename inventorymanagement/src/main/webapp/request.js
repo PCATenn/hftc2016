@@ -61,7 +61,6 @@ function submitRequest( rowIndex)  {
 	}
 	var table = $("#dataTable").DataTable();
 	var rowdata = table.row(rowIndex).data();
-	console.log('row data: ' + rowdata);
     var qty = $('#qty'+rowdata.id).val();
     var familyId = $('#request-items .input-field').val();
     var payload = {
@@ -72,7 +71,6 @@ function submitRequest( rowIndex)  {
         "productDesc": rowdata.productDesc,
         "location": rowdata.location
     };
-    console.log("payload: " + payload);
     var $form = $('<form method="POST" action="request/begin"></form>');
     for (var key in payload) {
         $('<input>').attr('type','hidden').attr('name',key).attr('value',payload[key]).appendTo($form);

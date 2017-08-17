@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.pcat.inventory.model.FamilyInventory;
 import org.pcat.inventory.model.FamilyInventoryDisplayRequest;
 import org.pcat.inventory.model.Inventory;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,23 @@ public class FamilyInventoryDisplayRequestDao extends BaseDao {
 	public List<FamilyInventoryDisplayRequest> findAll() {
 		List<FamilyInventoryDisplayRequest> familyInventoryDisplayRequests = (List<FamilyInventoryDisplayRequest>) super.findAll(FamilyInventoryDisplayRequest.class);
 		return familyInventoryDisplayRequests;
+	}
+	public List<FamilyInventoryDisplayRequest> findAllPending() {
+		List<FamilyInventoryDisplayRequest> result = null;
+		Session session = null;
+		try {
+			session = getSession();
+			Criteria criteria = session.createCriteria(FamilyInventoryDisplayRequest.class);
+			criteria.add(Restrictions.eq("status", "Pending"));
+			result = criteria.list();
+		} catch (Exception e) {
+			handleException(e, null);
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return result;
 	}
 
 	public List<FamilyInventoryDisplayRequest> findAllForIds(List<Integer> homeVisitorIds) {

@@ -39,7 +39,7 @@
 
             <div class="section-body">
                 <h2>
-                    Forwarded for approval.
+                    forwarded for approval.
                 </h2>
 
                 <h3>
